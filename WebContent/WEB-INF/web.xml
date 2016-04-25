@@ -91,5 +91,15 @@
         <servlet-name>InvestorConsumptionController</servlet-name>
         <url-pattern>/InvestorConsumptionController</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>BillingController</servlet-name>
+        <servlet-class>com.ht.servlets.BillingController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BillingController</servlet-name>
+        <url-pattern>/BillingController</url-pattern>
+    </servlet-mapping>
 
 </web-app>

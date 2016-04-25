@@ -20,8 +20,8 @@ public class MachinesDAO {
 			ps.setString(1, machine.getCode());
 			ps.setString(2, machine.getCapacity());
 			ps.setString(3, machine.getCommissionedDate());
-			ps.setString(4, machine.getActiveRate());
-			ps.setString(5, machine.getReactiveRate());
+			ps.setFloat(4, machine.getActiveRate());
+			ps.setFloat(5, machine.getReactiveRate());
 			ps.setString(6, machine.getPpaLetterNo());
 			ps.setString(7, machine.getPpaDate());
 			ps.setInt(8, machine.getDeveloperId());
@@ -42,8 +42,8 @@ public class MachinesDAO {
 			ps.setString(1, machine.getCode());
 			ps.setString(2, machine.getCapacity());
 			ps.setString(3, machine.getCommissionedDate());
-			ps.setString(4, machine.getActiveRate());
-			ps.setString(5, machine.getReactiveRate());
+			ps.setFloat(4, machine.getActiveRate());
+			ps.setFloat(5, machine.getReactiveRate());
 			ps.setString(6, machine.getPpaLetterNo());
 			ps.setString(7, machine.getPpaDate());
 			ps.setInt(8, machine.getDeveloperId());
@@ -165,8 +165,8 @@ public class MachinesDAO {
 				machine.setCode(rs.getString(2));
 				machine.setCapacity(rs.getString(3));
 				machine.setCommissionedDate(rs.getString(4));
-				machine.setActiveRate(rs.getString(5));
-				machine.setReactiveRate(rs.getString(6));
+				machine.setActiveRate(rs.getFloat(5));
+				machine.setReactiveRate(rs.getFloat(6));
 				machine.setPpaLetterNo(rs.getString(7));
 				machine.setPpaDate(rs.getString(8));
 				machine.setDeveloperId(rs.getInt(9));

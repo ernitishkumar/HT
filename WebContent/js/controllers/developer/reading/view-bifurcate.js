@@ -71,6 +71,22 @@ angular.module("htBillingApp").controller('ViewBifircateReadingsController', ['$
     
     this.generateBill = function (investorData) {
     	investorData.generating = true;
+    	$http({
+            method: 'GET',
+            url: 'BillingController',
+            params: {
+                action: 'generate',
+                consumptionId: investorData.consumption.id,
+                investorId: investorData.investor.id,
+                bifurcationId:investorData.id
+            }
+        }).then(function (response) {
+        	var result = response.data.Result;
+        	if(result === "OK"){
+        		investorData.generating = false;
+        		investorData.billGenerated = true;
+        	}
+        });
     };
     
     this.viewBill = function () {

@@ -10,9 +10,9 @@ public class Machine {
 	
 	private String commissionedDate;
 	
-	private String activeRate;
+	private float activeRate;
 	
-	private String reactiveRate;
+	private float reactiveRate;
 	
 	private String ppaDate;
 	
@@ -64,19 +64,19 @@ public class Machine {
 		this.commissionedDate = commissionedDate;
 	}
 
-	public String getActiveRate() {
+	public float getActiveRate() {
 		return activeRate;
 	}
 
-	public void setActiveRate(String activeRate) {
+	public void setActiveRate(float activeRate) {
 		this.activeRate = activeRate;
 	}
 
-	public String getReactiveRate() {
+	public float getReactiveRate() {
 		return reactiveRate;
 	}
 
-	public void setReactiveRate(String reactiveRate) {
+	public void setReactiveRate(float reactiveRate) {
 		this.reactiveRate = reactiveRate;
 	}
 

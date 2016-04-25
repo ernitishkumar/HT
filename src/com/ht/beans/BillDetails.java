@@ -19,6 +19,7 @@ public class BillDetails {
 	private float reactiveAmount;
 	private float totalAmount;
 	private float totalAmountRoundOff;
+	
 	public int getId() {
 		return id;
 	}
@@ -166,4 +167,17 @@ public class BillDetails {
 	}
 	public BillDetails() {
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "BillDetails [billNo=" + billNo + ", invoiceNo=" + invoiceNo + ", meterReadingId=" + meterReadingId
+				+ ", investorId=" + investorId + ", consumptionId=" + consumptionId + ", meterNo=" + meterNo
+				+ ", readingDate=" + readingDate + ", billGenerationDate=" + billGenerationDate + ", totalKWH="
+				+ totalKWH + ", totalRKVH=" + totalRKVH + ", kwhRate=" + kwhRate + ", rkvhRate=" + rkvhRate
+				+ ", activeAmount=" + activeAmount + ", reactiveAmount=" + reactiveAmount + ", totalAmount="
+				+ totalAmount + ", totalAmountRoundOff=" + totalAmountRoundOff + "]";
+	}
+	
 }
