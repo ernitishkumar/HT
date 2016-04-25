@@ -56,6 +56,7 @@ public class BillingController extends HttpServlet{
 							billDetails.setMeterReadingId(consumption.getMeterReadingId());
 							billDetails.setInvestorId(investor.getId());
 							billDetails.setConsumptionId(consumption.getId());
+							billDetails.setConsumptionBifurcationId(investorConsumption.getId());
 							billDetails.setMeterNo(consumption.getMeterNo());
 							billDetails.setReadingDate(meterReadings.getReadingDate());
 							billDetails.setBillGenerationDate(currentDate);

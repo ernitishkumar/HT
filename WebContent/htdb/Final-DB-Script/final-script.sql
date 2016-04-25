@@ -199,6 +199,7 @@ Create table bill_details (
 	meter_readings_id Int NOT NULL,
 	investor_id Int NOT NULL,
 	consumption_id Int NOT NULL,
+	consumption_bifurcation_id Int NOT NULL,
 	meter_no Varchar(50) NOT NULL,
 	reading_date Char(20),
 	bill_generation_date Char(20),
@@ -212,7 +213,7 @@ Create table bill_details (
 	total_amount_roundoff Float,
 	UNIQUE (bill_no),
 	UNIQUE (invoice_no),
- Primary Key (id)) ENGINE = MyISAM;
+ Primary Key (id)) ENGINE = InnoDB;
 
 
 

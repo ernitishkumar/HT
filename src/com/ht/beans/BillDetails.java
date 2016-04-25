@@ -8,6 +8,7 @@ public class BillDetails {
 	private int meterReadingId;
 	private int investorId;
 	private int consumptionId;
+	private int consumptionBifurcationId;
 	private String meterNo;
 	private String readingDate;
 	private String billGenerationDate;
@@ -55,6 +56,20 @@ public class BillDetails {
 	}
 	public void setConsumptionId(int consumptionId) {
 		this.consumptionId = consumptionId;
+	}
+	
+	/**
+	 * @return the consumptionBifurcationId
+	 */
+	public int getConsumptionBifurcationId() {
+		return consumptionBifurcationId;
+	}
+	/**
+	 * @param consumptionBifurcationId the consumptionBifurcationId to set
+	 */
+	
+	public void setConsumptionBifurcationId(int consumptionBifurcationId) {
+		this.consumptionBifurcationId = consumptionBifurcationId;
 	}
 	public String getMeterNo() {
 		return meterNo;
@@ -122,9 +137,29 @@ public class BillDetails {
 	public void setTotalAmountRoundOff(float totalAmountRoundOff) {
 		this.totalAmountRoundOff = totalAmountRoundOff;
 	}
+	/**
+	 * @param id
+	 * @param billNo
+	 * @param invoiceNo
+	 * @param meterReadingId
+	 * @param investorId
+	 * @param consumptionId
+	 * @param consumptionBifurcationId
+	 * @param meterNo
+	 * @param readingDate
+	 * @param billGenerationDate
+	 * @param totalKWH
+	 * @param totalRKVH
+	 * @param kwhRate
+	 * @param rkvhRate
+	 * @param activeAmount
+	 * @param reactiveAmount
+	 * @param totalAmount
+	 * @param totalAmountRoundOff
+	 */
 	public BillDetails(int id, String billNo, String invoiceNo, int meterReadingId, int investorId, int consumptionId,
-			String meterNo, String readingDate, String billGenerationDate, float totalKWH, float totalRKVH,
-			float kwhRate, float rkvhRate, float activeAmount, float reactiveAmount, float totalAmount,
+			int consumptionBifurcationId, String meterNo, String readingDate, String billGenerationDate, float totalKWH,
+			float totalRKVH, float kwhRate, float rkvhRate, float activeAmount, float reactiveAmount, float totalAmount,
 			float totalAmountRoundOff) {
 		this.id = id;
 		this.billNo = billNo;
@@ -132,6 +167,7 @@ public class BillDetails {
 		this.meterReadingId = meterReadingId;
 		this.investorId = investorId;
 		this.consumptionId = consumptionId;
+		this.consumptionBifurcationId = consumptionBifurcationId;
 		this.meterNo = meterNo;
 		this.readingDate = readingDate;
 		this.billGenerationDate = billGenerationDate;
@@ -144,15 +180,35 @@ public class BillDetails {
 		this.totalAmount = totalAmount;
 		this.totalAmountRoundOff = totalAmountRoundOff;
 	}
+	/**
+	 * @param billNo
+	 * @param invoiceNo
+	 * @param meterReadingId
+	 * @param investorId
+	 * @param consumptionId
+	 * @param consumptionBifurcationId
+	 * @param meterNo
+	 * @param readingDate
+	 * @param billGenerationDate
+	 * @param totalKWH
+	 * @param totalRKVH
+	 * @param kwhRate
+	 * @param rkvhRate
+	 * @param activeAmount
+	 * @param reactiveAmount
+	 * @param totalAmount
+	 * @param totalAmountRoundOff
+	 */
 	public BillDetails(String billNo, String invoiceNo, int meterReadingId, int investorId, int consumptionId,
-			String meterNo, String readingDate, String billGenerationDate, float totalKWH, float totalRKVH,
-			float kwhRate, float rkvhRate, float activeAmount, float reactiveAmount, float totalAmount,
+			int consumptionBifurcationId, String meterNo, String readingDate, String billGenerationDate, float totalKWH,
+			float totalRKVH, float kwhRate, float rkvhRate, float activeAmount, float reactiveAmount, float totalAmount,
 			float totalAmountRoundOff) {
 		this.billNo = billNo;
 		this.invoiceNo = invoiceNo;
 		this.meterReadingId = meterReadingId;
 		this.investorId = investorId;
 		this.consumptionId = consumptionId;
+		this.consumptionBifurcationId = consumptionBifurcationId;
 		this.meterNo = meterNo;
 		this.readingDate = readingDate;
 		this.billGenerationDate = billGenerationDate;
@@ -165,19 +221,21 @@ public class BillDetails {
 		this.totalAmount = totalAmount;
 		this.totalAmountRoundOff = totalAmountRoundOff;
 	}
-	public BillDetails() {
-	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "BillDetails [billNo=" + billNo + ", invoiceNo=" + invoiceNo + ", meterReadingId=" + meterReadingId
-				+ ", investorId=" + investorId + ", consumptionId=" + consumptionId + ", meterNo=" + meterNo
-				+ ", readingDate=" + readingDate + ", billGenerationDate=" + billGenerationDate + ", totalKWH="
-				+ totalKWH + ", totalRKVH=" + totalRKVH + ", kwhRate=" + kwhRate + ", rkvhRate=" + rkvhRate
-				+ ", activeAmount=" + activeAmount + ", reactiveAmount=" + reactiveAmount + ", totalAmount="
-				+ totalAmount + ", totalAmountRoundOff=" + totalAmountRoundOff + "]";
+		return "BillDetails [id=" + id + ", billNo=" + billNo + ", invoiceNo=" + invoiceNo + ", meterReadingId="
+				+ meterReadingId + ", investorId=" + investorId + ", consumptionId=" + consumptionId
+				+ ", consumptionBifurcationId=" + consumptionBifurcationId + ", meterNo=" + meterNo + ", readingDate="
+				+ readingDate + ", billGenerationDate=" + billGenerationDate + ", totalKWH=" + totalKWH + ", totalRKVH="
+				+ totalRKVH + ", kwhRate=" + kwhRate + ", rkvhRate=" + rkvhRate + ", activeAmount=" + activeAmount
+				+ ", reactiveAmount=" + reactiveAmount + ", totalAmount=" + totalAmount + ", totalAmountRoundOff="
+				+ totalAmountRoundOff + "]";
 	}
-	
+
+	public BillDetails(){
+		
+	}
 }
