@@ -1,0 +1,33 @@
+//user
+insert into users(username,password,name) values('suzlon','suzlon','Suzlon Pvt. Ltd.');
+insert into users(username,password,name) values('maruti','maruti','Maruti-Shakti Energy India Limited');
+
+//userroles
+insert into user_roles(username,user_role,region,circle,division) values('suzlon','developer','indore','indore','indore');
+insert into user_roles(username,user_role,region,circle,division) values('maruti','developer','indore','ratlam','ratlam');
+
+//developer
+insert into developers(name,cin,office_address,office_contact_no,office_contact_person,office_email,site_address,site_contact_no,site_contact_person,site_email,username) values('M/S Suzlon Pvt. Ltd','C4654645646','new delhi,rnd marg','0114578945','ramesh','suzlondelhi@suzlon.com','suzlon tower,mg road,indore','0731457896','haish','suzlonindore@suzlon.com','suzlon');
+insert into developers(name,cin,office_address,office_contact_no,office_contact_person,office_email,site_address,site_contact_no,site_contact_person,site_email,username) values('Maruti-Shakti Energy India Ltd','C4854645646','rnd marg,mumbai,m.h','0224578945','ramesh','marutishakti@gmail.com','maruti tower,mg road,indore','0731457996','haish','marutishakiindore@gmail.com','maruti');
+
+update meter_readings set developer_name='Maruti-Shakti Energy India Ltd' where id=20;
+update meter_readings set ht_cell_validation=0 where id=21
+
+//plants
+insert into plants(code,address,contact_no,contact_person,email,commissioned_date,type,circuit_voltage,injecting_substation,feeder_name,region,circle,division,main_meter_no,check_meter_no,standby_meter_no,developer_id) values('1PWIR1','ratlam mountain near temple','7485964511','ankit','ankitratlam@suzlon.com','01-03-2013','wind','1.25MW','ratlamehvs','ratlamsuzlonwind','ujjain','ratlam','ratlam','MPC53468','MPC53444','MPC53666',1);
+insert into plants(code,address,contact_no,contact_person,email,commissioned_date,type,circuit_voltage,injecting_substation,feeder_name,region,circle,division,main_meter_no,check_meter_no,standby_meter_no,developer_id) values('1PWIR4','dewas wind farm','7485964511','ankit','ankitdewas@suzlon.com','01-03-2015','wind','1.25MW','dewasehvs','dewas2suzlonwind','indore','dewas','dewas','MPC53476','MPC53444','MPC53666',1);
+insert into plants(code,address,contact_no,contact_person,email,commissioned_date,type,circuit_voltage,injecting_substation,feeder_name,region,circle,division,main_meter_no,check_meter_no,standby_meter_no,developer_id) values('1PWIR3','dewas wind farm','7485964511','ankit','ankitdewas@suzlon.com','01-03-2014','wind','1.25MW','dewashvs','ratlamsuzlonwind','indore','dewas','dewas','MPC53475','MPC53444','MPC53666',1);
+insert into plants(code,address,contact_no,contact_person,email,commissioned_date,type,circuit_voltage,injecting_substation,feeder_name,region,circle,division,main_meter_no,check_meter_no,standby_meter_no,developer_id) values('1PWUJ1','ratlam mountain near temple','7485964678','mayank','mayankratlam@gmail.com','01-03-2012','wind','1.25MW','ratlamehvs','ratlammarutiwind','ujjain','ratlam','ratlam','MPC53478','MPC53111','MPC53222',2);
+
+//Investors
+insert into investors(code,name,cin,tin,vat,invoice_no) values('XXX','M/S D.B CORP, BHOPAL','C78456','87456654411','
+VAT48566','IR/WIND/15-16');
+insert into investors(code,name,cin,tin,vat,invoice_no) values('AAA','M/S M K ENTERPRISES, JAIPUR','C788988','78456123556','
+VAT48576','IR/WIND1/15-16');
+
+//Investors Plant Mapping
+insert into investor_plant_mapping(plant_id,plant_code,investor_id,investor_code) values(2,'1PWUJ1',1,'XXX');
+
+//Machines 
+insert into machines(code,capacity,commissioned_date,active_rate,reactive_rate,ppa_letter_no,ppa_date,developer_id,plant_id,investor_id) VALUES('DFE','110kv','01-01-2015',5.50,0.97,'05-01/1425 from O/o CGM (Comml.) M.P. Tradeco, Jabalpur.','01-03-2015',1,1,2)
+insert into machines(code,capacity,commissioned_date,active_rate,reactive_rate,ppa_letter_no,ppa_date,developer_id,plant_id,investor_id) VALUES('ABC','110kv','01-01-2015',5.50,0.97,'05-01/1425 from O/o CGM (Comml.) M.P. Tradeco, Jabalpur.','01-03-2015',1,1,2)

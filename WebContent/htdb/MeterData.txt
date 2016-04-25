@@ -1,0 +1,11 @@
+insert into user_roles(username,user_role,region,circle,division) values("HT_RATLAM","circle","indore","ratlam","ratlam");
+
+insert into users(username,password,name) values("HT_RATLAM","ht_ratlam","Ratlam Circle");
+
+
+
+insert into plant_details (name,circuit_connected_to,type,region,circle,division,commission_date,developer_name,no_of_investors,no_of_machines,contract_demand,supply_voltage,installed_meter_no,meter_installation_date)
+values("CENTRAX FABRICS","UJJAS Circuit","solar","Indore","ratlam","ratlam","01-05-2015","null",5,5,"1.25 MW","33KV","MPC53475","01-10-2015");
+
+insert into plant_details (name,circuit_connected_to,type,region,circle,division,commission_date,developer_name,no_of_investors,no_of_machines,contract_demand,supply_voltage,installed_meter_no,meter_installation_date)
+values("CENTRAX FABRICS","UJJAS Circuit","solar","Indore","ratlam","ratlam","01-05-2015","null",5,5,"1.25 MW","33KV","MPC53473","01-10-2015");

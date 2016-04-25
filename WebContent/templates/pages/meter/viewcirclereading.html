@@ -1,0 +1,168 @@
+<br>
+<br>
+<br>
+<br>
+<div class="navbar navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:void(0);">HTBilling</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="javascript:void(0);" ng-click="viewMeterReadingsCtrl.loadCircleHome()">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span>  {{user.name}}<strong class="caret"></strong></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="javascript:void(0);"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" ng-click="viewMeterReadingsCtrl.logout()"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="page-header text-center">
+        <h2><span class="glyphicon glyphicon-certificate"></span>View Meter Readings</h2>
+    </div>
+    <div name="panelsHolder" ng-repeat="reading in readingData" class="container col-md-offset-1 col-md-10">
+        <div class="panel panel-success">
+            <div class="panel-heading text-center">Meter Readings For {{reading.meterNo}}</div>
+            <div class="panel-body">
+                <p class="text-center">
+                    Developer Name: {{reading.currentMeterReading.nameOfDeveloper}} &nbsp;&nbsp;&nbsp; Mf of Meter: {{reading.currentMeterReading.mf}} &nbsp;&nbsp;&nbsp; Site Location: {{reading.plantDetails.circle|uppercase}} &nbsp;&nbsp;&nbsp;
+
+                    <button type="button" class="btn btn-success" name="validateButton" ng-click="viewMeterReadingsCtrl.validateReading(reading)" ng-hide="reading.currentMeterReading.circleCellValidation">Validate Readings</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" name="discardButton" ng-hide="reading.currentMeterReading.circleCellValidation">Discard Readings</button>
+                    <br>
+                    <br>
+                    <span ng-show="reading.currentMeterReading.htCellValidation" class="label label-primary">Validated by HTCell</span>
+                    <span ng-hide="reading.currentMeterReading.htCellValidation" class="label label-danger">Not Validated by HTCell</span>
+                    <span ng-show="reading.currentMeterReading.developerValidation" class="label label-primary">Validated by Developer</span>
+                    <span ng-hide="reading.currentMeterReading.developerValidation" class="label label-danger">Not Validated by Developer</span>
+                    <span ng-show="reading.currentMeterReading.circleCellValidation" class="label label-primary">Validated by Circle</span>
+                    <span ng-hide="reading.currentMeterReading.circleCellValidation" class="label label-danger">Not Validated by Circle</span>
+                </p>
+            </div>
+            <!-- Table -->
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <th class="text-center">Meter No. {{reading.meterNo}}</th>
+                    <th class="text-center">Previous Month({{reading.previousMeterReading.readingDate}})</th>
+                    <th class="text-center">Current Month({{reading.currentMeterReading.readingDate}})</th>
+                    <th class="text-center">Difference</th>
+                    <th class="text-center">Consumption</th>
+                </thead>
+                <tbody class="text-center">
+                    <tr>
+                        <td>Active Energy</td>
+                        <td>{{reading.previousMeterReading.activeEnergy}}</td>
+                        <td>{{reading.currentMeterReading.activeEnergy}}</td>
+                        <td>
+                            {{ reading.activeEnergyDifference}}
+                        </td>
+                        <td>
+                            {{reading.activeEnergyConsumption}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tod One</td>
+                        <td>{{reading.previousMeterReading.activeTodOne}}</td>
+                        <td>{{reading.currentMeterReading.activeTodOne}}</td>
+                        <td>
+                            {{reading.todOneDifference}}
+                        </td>
+                        <td>
+                            {{reading.todOneConsumption}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tod Two</td>
+                        <td>{{reading.previousMeterReading.activeTodTwo}}</td>
+                        <td>{{reading.currentMeterReading.activeTodTwo}}</td>
+                        <td>
+                            {{reading.todTwoDifference}}
+                        </td>
+                        <td>
+                            {{reading.todTwoConsumption}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tod Three</td>
+                        <td>{{reading.previousMeterReading.activeTodThree}}</td>
+                        <td>{{reading.currentMeterReading.activeTodThree}}</td>
+                        <td>
+                            {{reading.todThreeDifference}}
+                        </td>
+                        <td>
+                            {{reading.todThreeConsumption}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Reactive Quadrant One</td>
+                        <td>{{reading.previousMeterReading.reactiveQuadrantOne}}</td>
+                        <td>{{reading.currentMeterReading.reactiveQuadrantOne}}</td>
+                        <td>
+                            {{reading.quadrantOneDifference}}
+                        </td>
+                        <td>
+                            {{reading.quadrantOneConsumption}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Reactive Quadrant Two</td>
+                        <td>{{reading.previousMeterReading.reactiveQuadrantTwo}}</td>
+                        <td>{{reading.currentMeterReading.reactiveQuadrantTwo}}</td>
+                        <td>
+                            {{reading.quadrantTwoDifference}}
+                        </td>
+                        <td>
+                            {{reading.quadrantTwoConsumption}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Reactive Quadrant Three</td>
+                        <td>{{reading.previousMeterReading.reactiveQuadrantThree}}</td>
+                        <td>{{reading.currentMeterReading.reactiveQuadrantThree}}</td>
+                        <td>
+                            {{reading.quadrantThreeDifference}}
+                        </td>
+                        <td>
+                            {{reading.quadrantThreeConsumption}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Reactive Quadrant Four</td>
+                        <td>{{reading.previousMeterReading.reactiveQuadrantFour}}</td>
+                        <td>{{reading.currentMeterReading.reactiveQuadrantFour}}</td>
+                        <td>
+                            {{reading.quadrantFourDifference}}
+                        </td>
+                        <td>
+                            {{reading.quadrantFourConsumption}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="row">
+    <br>
+    <hr>
+</div>

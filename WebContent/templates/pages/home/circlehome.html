@@ -1,0 +1,79 @@
+<br>
+<br>
+<br>
+<div class="navbar navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:void(0);">HTBilling</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="javascript:void(0);" ng-click="loadCircleHome()">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span>  {{user.name}}<strong class="caret"></strong></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="javascript:void(0);"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" ng-click="homeCtrl.logout()"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="jumbotron" align="center">
+    <h1>Welcome! to HT AMR Billing - Circle Home</h1>
+    <!--<p>This page will grow as we add more and more components from Bootstrap...</p>
+<a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-search"></span> Search</a>-->
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Readings Menu</h3>
+            </div>
+            <div class="panel-body text-center">
+                <ul class="nav nav-pills nav-stacked">
+                    <li role="presentation"><a href="javascript:void(0);" ng-click="homeCtrl.loadCircleReadingViewPage()">View Readings</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Meter Menu</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <!--<li role="presentation"><a href="javascript:void(0);" ng-click="homeCtrl.loadAddMeterPage()">Add Meter</a></li>
+                        <li role="presentation"><a href="javascript:void(0);">View Meter Details</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Plant Menu</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <!--<li role="presentation"><a href="javascript:void(0);">Add Plant Details</a></li>
+                        <li role="presentation"><a href="javascript:void(0);">View Plant Details</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>-->
+</div>

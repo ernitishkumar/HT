@@ -1,0 +1,169 @@
+DROP TABLE IF EXISTS `ht`.`consumptions`;
+CREATE TABLE  `ht`.`consumptions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meter_no` varchar(50) NOT NULL,
+  `date` varchar(50) NOT NULL,
+  `active_consumption` float NOT NULL,
+  `reactive_consumption` float NOT NULL,
+  `plant_id` int(11) DEFAULT NULL,
+  `plant_code` varchar(50) DEFAULT NULL,
+  `meter_reading_id` int(11) DEFAULT NULL,
+  `consumption_bifercated` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`developers`;
+CREATE TABLE  `ht`.`developers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `cin` varchar(20) DEFAULT NULL,
+  `office_address` varchar(200) DEFAULT NULL,
+  `office_contact_no` varchar(20) DEFAULT NULL,
+  `office_contact_person` varchar(50) DEFAULT NULL,
+  `office_email` varchar(50) DEFAULT NULL,
+  `site_address` varchar(200) DEFAULT NULL,
+  `site_contact_no` varchar(20) DEFAULT NULL,
+  `site_contact_person` varchar(50) DEFAULT NULL,
+  `site_email` varchar(50) DEFAULT NULL,
+  `username` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `cin` (`cin`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`investor_consumption`;
+CREATE TABLE  `ht`.`investor_consumption` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `consumption_id` int(11) NOT NULL,
+  `investor_id` int(11) NOT NULL,
+  `active_consumption` float DEFAULT NULL,
+  `reactive_consumption` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`investor_plant_mapping`;
+CREATE TABLE  `ht`.`investor_plant_mapping` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `plant_id` int(11) NOT NULL,
+  `plant_code` varchar(50) DEFAULT NULL,
+  `investor_id` int(11) NOT NULL,
+  `investor_code` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`investors`;
+CREATE TABLE  `ht`.`investors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `cin` varchar(50) DEFAULT NULL,
+  `tin` varchar(50) DEFAULT NULL,
+  `vat` varchar(50) DEFAULT NULL,
+  `invoice_no` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cin` (`cin`),
+  UNIQUE KEY `tin` (`tin`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`machines`;
+CREATE TABLE  `ht`.`machines` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) DEFAULT NULL,
+  `capacity` varchar(50) DEFAULT NULL,
+  `commissioned_date` varchar(20) DEFAULT NULL,
+  `active_rate` float NOT NULL,
+  `reactive_rate` float NOT NULL,
+  `ppa_letter_no` varchar(100) DEFAULT NULL,
+  `ppa_date` varchar(20) DEFAULT NULL,
+  `developer_id` int(11) NOT NULL,
+  `plant_id` int(11) NOT NULL,
+  `investor_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`meter_details`;
+CREATE TABLE  `ht`.`meter_details` (
+  `meter_no` varchar(50) NOT NULL,
+  `make` varchar(50) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `meter_class` varchar(50) DEFAULT NULL,
+  `ctr` varchar(20) DEFAULT NULL,
+  `ptr` varchar(20) DEFAULT NULL,
+  `mf` int(11) NOT NULL,
+  `equip_class` varchar(50) DEFAULT NULL,
+  `phase` varchar(50) DEFAULT NULL,
+  `meter_group` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`meter_no`),
+  UNIQUE KEY `meter_no` (`meter_no`),
+  UNIQUE KEY `meter_no_2` (`meter_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`meter_readings`;
+CREATE TABLE  `ht`.`meter_readings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meter_no` varchar(50) NOT NULL,
+  `mf` int(11) DEFAULT NULL,
+  `reading_date` varchar(20) DEFAULT NULL,
+  `active_reading` float NOT NULL,
+  `active_tod1` float NOT NULL,
+  `active_tod2` float NOT NULL,
+  `active_tod3` float DEFAULT NULL,
+  `reactive_q1` float NOT NULL,
+  `reactive_q2` float NOT NULL,
+  `reactive_q3` float NOT NULL,
+  `reactive_q4` float NOT NULL,
+  `ht_cell_validation` int(11) DEFAULT NULL,
+  `circle_cell_validation` int(11) DEFAULT NULL,
+  `developer_validation` int(11) DEFAULT NULL,
+  `discarded_flag` int(11) DEFAULT NULL,
+  `discarded_by` varchar(50) DEFAULT NULL,
+  `discarded_on` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`plants`;
+CREATE TABLE  `ht`.`plants` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `contact_no` varchar(20) DEFAULT NULL,
+  `contact_person` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `commissioned_date` varchar(20) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `circuit_voltage` varchar(50) DEFAULT NULL,
+  `injecting_substation` varchar(50) DEFAULT NULL,
+  `feeder_name` varchar(50) DEFAULT NULL,
+  `region` varchar(50) DEFAULT NULL,
+  `circle` varchar(50) DEFAULT NULL,
+  `division` varchar(50) DEFAULT NULL,
+  `main_meter_no` varchar(50) NOT NULL,
+  `check_meter_no` varchar(50) NOT NULL,
+  `standby_meter_no` varchar(50) DEFAULT NULL,
+  `developer_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`user_roles`;
+CREATE TABLE  `ht`.`user_roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `user_role` varchar(20) NOT NULL,
+  `region` varchar(50) DEFAULT NULL,
+  `circle` varchar(50) DEFAULT NULL,
+  `division` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`,`username`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`users`;
+CREATE TABLE  `ht`.`users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;

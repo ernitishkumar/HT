@@ -1,0 +1,20 @@
+DROP TABLE IF EXISTS `ht`.`meter_readings`;
+CREATE TABLE  `ht`.`meter_readings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meter_no` char(50) DEFAULT NULL,
+  `mf` int(11) DEFAULT NULL,
+  `reading_date` char(30) DEFAULT NULL,
+  `developer_name` varchar(100) DEFAULT NULL,
+  `active_reading` float DEFAULT NULL,
+  `active_tod1` float DEFAULT NULL,
+  `active_tod2` float DEFAULT NULL,
+  `active_tod3` float DEFAULT NULL,
+  `reactive_q1` float DEFAULT NULL,
+  `reactive_q2` float DEFAULT NULL,
+  `reactive_q3` float DEFAULT NULL,
+  `reactive_q4` float DEFAULT NULL,
+  `ht_cell_validation` int(11) DEFAULT NULL,
+  `circle_cell_validation` int(11) DEFAULT NULL,
+  `developer_validation` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;

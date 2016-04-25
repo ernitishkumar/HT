@@ -1,0 +1,11 @@
+@media print {
+    footer {
+        visibility: hidden;
+    }
+    .navbar {
+        visibility: hidden;
+    }
+    body {
+        margin-top: 0;
+    }
+}

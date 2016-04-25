@@ -1,0 +1,65 @@
+<br>
+<div class="navbar navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MPPKVVCL</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!--<li class="active">
+    <a href="/">Home</a>
+</li>
+<li>
+    <a href="/">Login</a>
+</li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row" id="loginDiv">
+    <br>
+    <br>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+            <div class="page-header text-center">
+                <h1><span class="glyphicon glyphicon-home"></span> Enter Login Details</h1>
+            </div>
+
+            <!--Show error messages-->
+            <div align='center'>
+                <h3>
+                    <span class="label label-danger" ng-show="error">{{error}}</span>
+               </h3>
+                <br>
+            </div>
+
+            <!--Form-->
+            <form ng-submit="fc.processForm()" name="loginForm">
+                <div id="name-group" class="form-group">
+                    <span class="glyphicon glyphicon-user">
+                    </span>
+                    <label>Enter Username</label>
+                    <input type='text' name='name' class='form-control' placeholder="Username" ng-model='fc.formData.username' required ng-change='error = null'>
+                    <span class='help-block'></span>
+                </div>
+                <div id="password-group" class="form-group">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <label>Enter Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password" ng-model="fc.formData.password" required ng-change='error = null'>
+                    <span class="help-block"></span>
+                </div>
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" class="btn btn-success btn-lg btn-block">
+                    Log In <span class="glyphicon glyphicon-log-in"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>

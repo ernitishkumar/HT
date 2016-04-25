@@ -1,0 +1,129 @@
+DROP TABLE IF EXISTS `ht`.`developers`;
+CREATE TABLE  `ht`.`developers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL DEFAULT '',
+  `cin` varchar(45) NOT NULL DEFAULT '',
+  `office_address` varchar(100) DEFAULT NULL,
+  `office_contact_no` varchar(20) DEFAULT NULL,
+  `office_contact_person` varchar(45) DEFAULT NULL,
+  `office_email` varchar(45) DEFAULT NULL,
+  `site_address` varchar(100) DEFAULT NULL,
+  `site_contact_no` varchar(20) DEFAULT NULL,
+  `site_contact_person` varchar(45) DEFAULT NULL,
+  `site_email` varchar(45) DEFAULT NULL,
+`username` varchar(45) UNIQUE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`plants`;
+CREATE TABLE  `ht`.`plants` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) NOT NULL DEFAULT '',
+  `address` varchar(100) DEFAULT NULL,
+  `contact_no` varchar(20) DEFAULT NULL,
+  `contact_person` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `commissioned_date` varchar(20) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `circuit_voltage` varchar(45) DEFAULT NULL,
+  `injecting_substation` varchar(45) DEFAULT NULL,
+  `feeder_name` varchar(45) DEFAULT NULL,
+  `region` varchar(45) DEFAULT NULL,
+  `circle` varchar(45) DEFAULT NULL,
+  `division` varchar(45) DEFAULT NULL,
+  `main_meter_no` varchar(45) NOT NULL DEFAULT '' UNIQUE,
+  `check_meter_no` varchar(45) NOT NULL DEFAULT '' UNIQUE,
+  `standby_meter_no` varchar(45) DEFAULT NULL UNIQUE,
+  `developer_id` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`investors`;
+CREATE TABLE  `ht`.`investors` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) NOT NULL DEFAULT '',
+  `name` varchar(45) NOT NULL DEFAULT '',
+  `cin` varchar(45) DEFAULT NULL UNIQUE,
+  `tin` varchar(45) DEFAULT NULL UNIQUE,
+  `vat` varchar(45) DEFAULT NULL,
+  `invoice_no` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`machines`;
+CREATE TABLE  `ht`.`machines` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) NOT NULL DEFAULT '',
+  `capacity` varchar(45) DEFAULT NULL,
+  `commissioned_date` varchar(45) NOT NULL DEFAULT '',
+  `ppa_rate` varchar(45) DEFAULT NULL,
+  `ppa_letter_no` varchar(45) DEFAULT NULL,
+  `ppa_date` varchar(20) DEFAULT NULL,
+  `developer_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `plant_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `investors_id` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ht`.`meter_readings`;
+CREATE TABLE  `ht`.`meter_readings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meter_no` char(50) DEFAULT NULL,
+  `mf` int(11) DEFAULT NULL,
+  `reading_date` char(30) DEFAULT NULL,
+  `developer_name` varchar(100) DEFAULT NULL,
+  `active_reading` float DEFAULT NULL,
+  `active_tod1` float DEFAULT NULL,
+  `active_tod2` float DEFAULT NULL,
+  `active_tod3` float DEFAULT NULL,
+  `reactive_q1` float DEFAULT NULL,
+  `reactive_q2` float DEFAULT NULL,
+  `reactive_q3` float DEFAULT NULL,
+  `reactive_q4` float DEFAULT NULL,
+  `ht_cell_validation` int(11) DEFAULT NULL,
+  `circle_cell_validation` int(11) DEFAULT NULL,
+  `developer_validation` int(11) DEFAULT NULL,
+  `discarded_flag` int(11) DEFAULT NULL,
+  `discarded_by` varchar(20) DEFAULT NULL,
+  `discarded_on` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `ht`.`consumptions`;
+CREATE TABLE  `ht`.`consumptions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `meter_no` varchar(45) NOT NULL,
+  `date` varchar(20) NOT NULL,
+  `active_consumption` float NOT NULL,
+  `reactive_consumption` float NOT NULL,
+  `plant_id` int(10) unsigned NOT NULL,
+  `plant_code` varchar(20) DEFAULT NULL,
+  `developer_id` int(10) unsigned NOT NULL,
+  `developer_code` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `ht`.`investor_consumption`;
+CREATE TABLE  `ht`.`investor_consumption` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `consumption_id` int(10) unsigned NOT NULL,
+  `investor_id` int(10) unsigned NOT NULL,
+  `active_consumption` float NOT NULL,
+  `reactive_consumption` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `ht`.`investor_plant_mapping`;
+CREATE TABLE  `ht`.`investor_plant_mapping` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `plant_id` int(10) unsigned NOT NULL,
+  `plant_code` varchar(20) DEFAULT NULL,
+  `investor_id` int(10) unsigned NOT NULL,
+  `investor_code` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+

@@ -1,0 +1,96 @@
+<html ng-app="htBillingApp">
+
+<head>
+    <title>
+        HT Billing
+    </title>
+    <!-- LOADING JQuery -->
+    <script src="js/jquery/jquery-1.12.1.min.js"></script>
+
+    <!-- LOADING Bootstrap -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- LOADING ANGULAR LIB-->
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/angular/angular-route.min.js"></script>
+    <script src="js/angular/angular-animate.min.js"></script>
+
+    <!-- LOADING FUNCTION SCRIPTS-->
+    <script src="js/app.js"></script>
+    <script src="js/controllers/form-controller.js"></script>
+    <script src="js/controllers/login/login.js"></script>
+
+    <!-- LOADING FUNCTION HT SCRIPTS-->
+    <script src="js/controllers/ht/home/home.js"></script>
+    <script src="js/controllers/ht/meter/add.js"></script>
+    <script src="js/controllers/ht/reading/insert.js"></script>
+    <script src="js/controllers/ht/reading/view.js"></script>
+
+    <!-- LOADING FUNCTION DEVELOPER SCRIPTS-->
+    <script src="js/controllers/developer/home/home.js"></script>
+    <script src="js/controllers/developer/reading/view.js"></script>
+    <script src="js/controllers/developer/reading/bifurcate.js"></script>
+    <script src="js/controllers/developer/reading/view-bifurcate.js"></script>
+
+    <!-- LOADING FUNCTION CIRCLE SCRIPTS-->
+    <script src="js/controllers/circle/home/home.js"></script>
+    <script src="js/controllers/circle/consumption/consumption_validation.js"></script>
+
+    <!-- LOADING FUNCTION OPERATOR SCRIPTS-->
+    <script src="js/controllers/operator/home/home.js"></script>
+
+    <!-- LOADING Custom StyleSheet -->
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- LOADING Print StyleSheet -->
+    <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+
+<body>
+    <div id="holder">
+        <div ng-view class="container" id="body">
+
+        </div>
+        <footer>
+            <!--<div ng-include="'MasterPageBottomSection.html'"></div>-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h6>Copyright &copy;2015-16 MPPKVVCL</h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <h6>About Us</h6>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <h6>Navigations</h6>
+                        <ul class="unstyled">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="http://mpwzservices.mpwin.co.in/mpeb_english/">Urjas portal</a></li>
+                            <li><a href="http://www.mpwz.co.in/portal/Indore_home.portal">MPWZ</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2">
+                        <h6>Follow us</h6>
+                        <ul class="unstyled">
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Google Plus</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2">
+                        <h6>Coded with <span class="glyphicon glyphicon-heart"></span> by Ankit</h6>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

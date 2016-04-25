@@ -1,0 +1,95 @@
+<web-app>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.ht.servlets.Login</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ValidateSession</servlet-name>
+        <servlet-class>com.ht.servlets.ValidateSession</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ValidateSession</servlet-name>
+        <url-pattern>/ValidateSession</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.ht.servlets.Logout</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MeterController</servlet-name>
+        <servlet-class>com.ht.servlets.MeterController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MeterController</servlet-name>
+        <url-pattern>/MeterController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PlantController</servlet-name>
+        <servlet-class>com.ht.servlets.PlantController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PlantController</servlet-name>
+        <url-pattern>/PlantController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MeterReadingsController</servlet-name>
+        <servlet-class>com.ht.servlets.MeterReadingsController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MeterReadingsController</servlet-name>
+        <url-pattern>/MeterReadingsController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ConsumptionsController</servlet-name>
+        <servlet-class>com.ht.servlets.ConsumptionsController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ConsumptionsController</servlet-name>
+        <url-pattern>/ConsumptionsController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>InvestorController</servlet-name>
+        <servlet-class>com.ht.servlets.InvestorController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InvestorController</servlet-name>
+        <url-pattern>/InvestorController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>InvestorConsumptionController</servlet-name>
+        <servlet-class>com.ht.servlets.InvestorConsumptionController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InvestorConsumptionController</servlet-name>
+        <url-pattern>/InvestorConsumptionController</url-pattern>
+    </servlet-mapping>
+
+</web-app>

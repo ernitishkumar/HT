@@ -1,0 +1,118 @@
+<div class="navbar navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:void(0);">HTBilling</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="javascript:void(0);" ng-click="addMeterCtrl.loadHome()">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span>  {{user.name}}<strong class="caret"></strong></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="javascript:void(0);"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" ng-click="addMeterCtrl.logout()"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="page-header text-center">
+            <h1><span class="glyphicon glyphicon-certificate"></span> Enter Meter Details.</h1>
+        </div>
+
+        <!--Show error messages
+        <div align='center'>
+            <h3><span class="label label-danger" ng-show="error">{{error}}</span>
+        </h3>
+            <br>
+        </div>-->
+
+        <!--Form-->
+        <form name="meternoForm" id="meternoForm" ng-submit="addMeterCtrl.processForm()">
+            <div class="form-group has-feedback">
+                <span class="glyphicon glyphicon-asterisk">
+                </span>
+                <label for="meterno">Enter Meter No.</label>
+                <input class="form-control" type="text" placeholder="Meter No" ng-model="addMeterCtrl.formData.meterNo" required>
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-star"></span>
+                <label>Make:</label>
+                <input class="form-control" type="text" placeholder="Make" ng-model="addMeterCtrl.formData.make" required>
+
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-star"></span>
+                <label>Category:</label>
+                <input class="form-control" type="text" placeholder="Category" ng-model="addMeterCtrl.formData.category" required>
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-star"></span>
+                <label>Type:</label>
+                <input class="form-control" type="text" placeholder="Type" ng-model="addMeterCtrl.formData.type" required>
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <label>Meter Class:</label>
+                <input class="form-control" type="text" placeholder="Meter Class" ng-model="addMeterCtrl.formData.meterClass" required>
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <label>CTR:</label>
+                <input class="form-control" type="text" placeholder="CTR" ng-model="addMeterCtrl.formData.ctr" required>
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <label>PTR:</label>
+                <input class="form-control" type="text" placeholder="PTR" ng-model="addMeterCtrl.formData.ptr" required>
+            </div>
+            <div class=" form-group ">
+                <span class="glyphicon glyphicon-pencil "></span>
+                <label>MF</label>
+                <input class="form-control " type="number" placeholder="MF" ng-model="addMeterCtrl.formData.mf" required>
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-pencil "></span>
+                <label>Equipment Class:</label>
+                <input class="form-control" type="text" placeholder="Equipment Class" ng-model="addMeterCtrl.formData.equipmentClass" required>
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-star"></span>
+                <label>Phase:</label>
+                <input class="form-control" type="text" placeholder="Phase" ng-model="addMeterCtrl.formData.phase" required>
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-star"></span>
+                <label>Mater Group:</label>
+                <input class="form-control" type="text" placeholder="Meter Group" ng-model="addMeterCtrl.formData.meterGroup" required>
+            </div>
+            <div class="form-group ">
+                <div class="col-md-6 ">
+                    <button type="submit " class="btn btn-success btn-lg btn-block ">
+                        <span class="glyphicon glyphicon-flash "></span> Add Meter!
+                    </button>
+                </div>
+                <div class="col-md-6 ">
+                    <button class="btn btn-danger btn-lg btn-block " type="reset" ng-click="addMeterCtrl.clearForm()">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
