@@ -1,6 +1,6 @@
 /*
 Created		08-04-2016
-Modified		08-04-2016
+Modified		25-04-2016
 Project		
 Model		
 Company		
@@ -25,11 +25,12 @@ Database		mySQL 5
 
 
 
+drop table IF EXISTS bill_details;
 drop table IF EXISTS user_roles;
 drop table IF EXISTS plants;
 drop table IF EXISTS Users;
-drop table IF EXISTS meter_readings;
 drop table IF EXISTS meter_details;
+drop table IF EXISTS meter_readings;
 drop table IF EXISTS machines;
 drop table IF EXISTS investors;
 drop table IF EXISTS investor_plant_mapping;
@@ -49,6 +50,8 @@ Create table consumptions (
 	plant_id Int,
 	plant_code Varchar(50),
 	developer_id Int,
+	meter_reading_id Int,
+	consumption_bifercated Int,
  Primary Key (id)) ENGINE = MyISAM;
 
 Create table developers (
@@ -74,6 +77,8 @@ Create table investor_consumption (
 	investor_id Int NOT NULL,
 	active_consumption Float,
 	reactive_consumption Float,
+	circle_validation Int,
+	bill_generated Int,
  Primary Key (id)) ENGINE = MyISAM;
 
 Create table investor_plant_mapping (
@@ -114,6 +119,7 @@ Create table meter_readings (
 	id Int NOT NULL AUTO_INCREMENT,
 	mf Int,
 	reading_date Varchar(20),
+	reading_time Char(30),
 	active_reading Float NOT NULL,
 	active_tod1 Float NOT NULL,
 	active_tod2 Float NOT NULL,
@@ -131,7 +137,7 @@ Create table meter_readings (
  Primary Key (id)) ENGINE = MyISAM;
 
 Create table meter_details (
-	meter_no Varchar(50) NOT NULL Unique,
+	meter_no Varchar(50) NOT NULL AUTO_INCREMENT,
 	make Varchar(50),
 	category Varchar(50),
 	type Varchar(50),
@@ -156,6 +162,7 @@ Create table Users (
 Create table plants (
 	id Int NOT NULL AUTO_INCREMENT,
 	code Varchar(50),
+	name Varchar(200),
 	address Varchar(200),
 	contact_no Varchar(20),
 	contact_person Varchar(50),
@@ -184,6 +191,28 @@ Create table user_roles (
 	division Varchar(50),
 	UNIQUE (username),
  Primary Key (id,username)) ENGINE = MyISAM;
+
+Create table bill_details (
+	id Int NOT NULL AUTO_INCREMENT,
+	bill_no Varchar(200) NOT NULL,
+	invoice_no Varchar(200),
+	meter_readings_id Int NOT NULL,
+	investor_id Int NOT NULL,
+	consumption_id Int NOT NULL,
+	meter_no Varchar(50) NOT NULL,
+	reading_date Char(20),
+	bill_generation_date Char(20),
+	total_kwh Float NOT NULL,
+	total_rkvh Float NOT NULL,
+	kwh_rate Float NOT NULL,
+	rkvh_rate Float NOT NULL,
+	active_amount Float NOT NULL,
+	reactive_amount Float NOT NULL,
+	total_amount Float NOT NULL,
+	total_amount_roundoff Float,
+	UNIQUE (bill_no),
+	UNIQUE (invoice_no),
+ Primary Key (id)) ENGINE = MyISAM;
 
 
 

@@ -1,3 +1,27 @@
+DROP TABLE IF EXISTS `ht`.`bill_details`;
+CREATE TABLE  `ht`.`bill_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bill_no` varchar(200) NOT NULL,
+  `invoice_no` varchar(200) DEFAULT NULL,
+  `meter_readings_id` int(11) NOT NULL,
+  `investor_id` int(11) NOT NULL,
+  `consumption_id` int(11) NOT NULL,
+  `meter_no` varchar(50) NOT NULL,
+  `reading_date` char(20) DEFAULT NULL,
+  `bill_generation_date` char(20) DEFAULT NULL,
+  `total_kwh` float NOT NULL,
+  `total_rkvh` float NOT NULL,
+  `kwh_rate` float NOT NULL,
+  `rkvh_rate` float NOT NULL,
+  `active_amount` float NOT NULL,
+  `reactive_amount` float NOT NULL,
+  `total_amount` float NOT NULL,
+  `total_amount_roundoff` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `bill_no` (`bill_no`),
+  UNIQUE KEY `invoice_no` (`invoice_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 DROP TABLE IF EXISTS `ht`.`consumptions`;
 CREATE TABLE  `ht`.`consumptions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -38,6 +62,8 @@ CREATE TABLE  `ht`.`investor_consumption` (
   `investor_id` int(11) NOT NULL,
   `active_consumption` float DEFAULT NULL,
   `reactive_consumption` float DEFAULT NULL,
+  `circle_validation` int(11) DEFAULT NULL,
+  `bill_generated` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
@@ -126,6 +152,7 @@ DROP TABLE IF EXISTS `ht`.`plants`;
 CREATE TABLE  `ht`.`plants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(50) DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL,
   `contact_no` varchar(20) DEFAULT NULL,
   `contact_person` varchar(50) DEFAULT NULL,
@@ -144,7 +171,7 @@ CREATE TABLE  `ht`.`plants` (
   `developer_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `ht`.`user_roles`;
 CREATE TABLE  `ht`.`user_roles` (
