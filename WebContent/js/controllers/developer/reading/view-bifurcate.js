@@ -4,6 +4,7 @@ angular.module("htBillingApp").controller('ViewBifircateReadingsController', ['$
 
     $scope.sno = 0;
 
+    $scope.generating = false;
     var checkUser = function () {
         $http({
             method: 'GET',
@@ -54,6 +55,11 @@ angular.module("htBillingApp").controller('ViewBifircateReadingsController', ['$
             var result = response.data.Result;
             if (result === 'OK') {
                 $scope.investorConsumptions = response.data.InvestorConsumptionData;
+                $scope.investorConsumptions.forEach(
+                function(item){
+                	item.generating = false;
+                }		
+                );
                 console.log($scope.investorConsumptions);
             }
         });
@@ -61,6 +67,14 @@ angular.module("htBillingApp").controller('ViewBifircateReadingsController', ['$
 
     this.back = function () {
         $location.path("/viewdeveloperreading");
+    };
+    
+    this.generateBill = function (investorData) {
+    	investorData.generating = true;
+    };
+    
+    this.viewBill = function () {
+    	
     };
 
 }]);
