@@ -5,16 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import com.ht.beans.MeterDetails;
 import com.ht.beans.MeterReadings;
 import com.ht.utility.GlobalResources;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import com.ht.beans.Plant;
-import com.ht.beans.Developer;
-import com.ht.dao.DevelopersDAO;
-import com.ht.beans.MeterDetails;
-import com.ht.dao.PlantsDAO;
 
 public class MeterReadingsDAO {
 
