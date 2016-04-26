@@ -31,3 +31,6 @@ insert into investor_plant_mapping(plant_id,plant_code,investor_id,investor_code
 //Machines 
 insert into machines(code,capacity,commissioned_date,active_rate,reactive_rate,ppa_letter_no,ppa_date,developer_id,plant_id,investor_id) VALUES('DFE','110kv','01-01-2015',5.50,0.97,'05-01/1425 from O/o CGM (Comml.) M.P. Tradeco, Jabalpur.','01-03-2015',1,1,2)
 insert into machines(code,capacity,commissioned_date,active_rate,reactive_rate,ppa_letter_no,ppa_date,developer_id,plant_id,investor_id) VALUES('ABC','110kv','01-01-2015',5.50,0.97,'05-01/1425 from O/o CGM (Comml.) M.P. Tradeco, Jabalpur.','01-03-2015',1,1,2)
+
+//Meter Details
+insert into meter_details (meter_no,make,category,type,meter_class,ctr,ptr,mf,equip_class,phase,meter_group) values('MPC53496','SEMS','MAIN','SOLAR','0.2S','25A/5A','33KV/110V','1000','0.2S','3PH4W','ABT')
