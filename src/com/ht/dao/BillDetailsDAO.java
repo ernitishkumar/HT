@@ -8,6 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.ht.beans.BillDetails;
+import com.ht.beans.BillDetailsView;
+import com.ht.beans.Consumption;
+import com.ht.beans.Investor;
+import com.ht.beans.InvestorConsumptionView;
+import com.ht.beans.MeterReadings;
 import com.ht.utility.GlobalResources;
 
 public class BillDetailsDAO {
@@ -133,6 +138,21 @@ public class BillDetailsDAO {
 		return billDetails.get(0);
 	}
 	
+	public BillDetails getByConsumptionBifurcationId(int consumptionBifurcationId){
+		ArrayList<BillDetails> billDetails = new ArrayList<BillDetails>();
+		Connection connection = GlobalResources.getConnection();
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from bill_details where consumption_bifurcation_id=?");
+			ps.setInt(1, consumptionBifurcationId);
+			ResultSet rs = ps.executeQuery();
+			billDetails = billDetailsMapper(rs);
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in class : BillDetailsDAO : method : [getByConsumptionBifurcationId(int)] "+e.getMessage());
+		}
+		return billDetails.get(0);
+	}
+	
 	public ArrayList<BillDetails> getByInvestorId(int investorId){
 		ArrayList<BillDetails> billDetails = new ArrayList<BillDetails>();
 		Connection connection = GlobalResources.getConnection();
@@ -193,5 +213,48 @@ public class BillDetailsDAO {
 			System.out.println("Exception in class : BillDetailsDAO : method : [billDetailsMapper(ResultSet)] "+e.getMessage());
 		}
 		return billDetailsList;
+	}
+	
+	public BillDetailsView getViewFromBean(BillDetails billDetails){
+		BillDetailsView billDetailsView = new BillDetailsView();
+		billDetailsView.setId(billDetails.getId());
+		billDetailsView.setBillNo(billDetails.getBillNo());
+		//uncomment below code once invoice is being set
+		//billDetailsView.setInvoiceNo(billDetails.getInvoiceNo());
+		
+		MeterReadingsDAO meterReadginsDAO = new MeterReadingsDAO();
+		MeterReadings meterReadings = meterReadginsDAO.getById(billDetails.getMeterReadingId());
+		billDetailsView.setMeterReadings(meterReadings);
+		
+		InvestorsDAO investorsDAO = new InvestorsDAO();
+		Investor investor = investorsDAO.getById(billDetails.getInvestorId());
+		billDetailsView.setInvestor(investor);
+		
+		ConsumptionsDAO consumptionsDAO = new ConsumptionsDAO();
+		Consumption consumption = consumptionsDAO.getById(billDetails.getConsumptionId());
+		billDetailsView.setConsumption(consumption);
+		
+		InvestorConsumptionDAO investorConsumptionDAO = new InvestorConsumptionDAO();
+		InvestorConsumptionView investorConsumptionView = investorConsumptionDAO.getViewFromBean(investorConsumptionDAO.getById(billDetails.getConsumptionBifurcationId()));
+		billDetailsView.setInvestorConsumptionView(investorConsumptionView);
+		
+		billDetailsView.setMeterNo(billDetails.getMeterNo());
+		
+		billDetailsView.setReadingDate(billDetails.getReadingDate());
+		billDetailsView.setBillGenerationDate(billDetails.getBillGenerationDate());
+		
+		billDetailsView.setTotalKWH(billDetails.getTotalKWH());
+		billDetailsView.setTotalRKVH(billDetails.getTotalRKVH());
+		
+		billDetailsView.setKwhRate(billDetails.getKwhRate());
+		billDetailsView.setRkvhRate(billDetails.getRkvhRate());
+		
+		billDetailsView.setActiveAmount(billDetails.getActiveAmount());
+		billDetailsView.setReactiveAmount(billDetails.getReactiveAmount());
+		
+		billDetailsView.setTotalAmount(billDetails.getTotalAmount());
+		billDetailsView.setTotalAmountRoundoff(billDetails.getTotalAmountRoundOff());
+		
+		return billDetailsView;
 	}
 }

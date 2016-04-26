@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.ht.beans.Consumption;
+import com.ht.beans.Investor;
 import com.ht.beans.InvestorConsumption;
+import com.ht.beans.InvestorConsumptionView;
 import com.ht.utility.GlobalResources;
 
 public class InvestorConsumptionDAO {
@@ -142,5 +145,56 @@ public class InvestorConsumptionDAO {
 			System.out.println("Exception in class : InvestorConsumptionDAO : method : [investorConsumptionMapper(ResultSet)] "+e.getMessage());
 		}
 		return investorConsumtionsList;
+	}
+	
+	public ArrayList<InvestorConsumptionView> getViewFromList(ArrayList<InvestorConsumption> investorConsumptionList,Consumption consumption){
+		ArrayList<InvestorConsumptionView> investorConsumptionViews= new ArrayList<InvestorConsumptionView>();
+		InvestorsDAO investorsDAO = new InvestorsDAO();
+		MachinesDAO machinesDAO = new MachinesDAO();
+		BillDetailsDAO billDetailsDAO = new BillDetailsDAO();
+		
+		for(InvestorConsumption investorConsumption:investorConsumptionList){
+			InvestorConsumptionView investorConsumptionView = new InvestorConsumptionView();
+			investorConsumptionView.setId(investorConsumption.getId());
+			investorConsumptionView.setConsumption(consumption);
+			investorConsumptionView.setActiveConsumption(investorConsumption.getActiveConsumption());
+			investorConsumptionView.setReactiveConsumption(investorConsumption.getReactiveConsumption());
+			Investor investor = investorsDAO.getById(investorConsumption.getInvestorId());
+			investorConsumptionView.setInvestor(investor);
+			investorConsumptionView.setMachines(machinesDAO.getByInvestorId(investor.getId()));
+			investorConsumptionView.setCircleValidation(investorConsumption.getCircleValidation());
+			investorConsumptionView.setBillGenerated(investorConsumption.getBillGenerated());
+			if(investorConsumption.getBillGenerated()==1){
+				investorConsumptionView.setBillDetailsId(billDetailsDAO.getByConsumptionBifurcationId(investorConsumption.getId()).getId());
+			}
+			investorConsumptionViews.add(investorConsumptionView);
+		}
+		return investorConsumptionViews;
+	}
+	
+	public InvestorConsumptionView getViewFromBean(InvestorConsumption investorConsumption){
+		InvestorConsumptionView investorConsumptionView = new InvestorConsumptionView();
+		
+		InvestorsDAO investorsDAO = new InvestorsDAO();
+		MachinesDAO machinesDAO = new MachinesDAO();
+		BillDetailsDAO billDetailsDAO = new BillDetailsDAO();
+		ConsumptionsDAO consumptionDAO = new ConsumptionsDAO();
+		
+		investorConsumptionView.setId(investorConsumption.getId());
+		investorConsumptionView.setConsumption(consumptionDAO.getById(investorConsumption.getConsumptionId()));
+		investorConsumptionView.setActiveConsumption(investorConsumption.getActiveConsumption());
+		investorConsumptionView.setReactiveConsumption(investorConsumption.getReactiveConsumption());
+		
+		Investor investor = investorsDAO.getById(investorConsumption.getInvestorId());
+		investorConsumptionView.setInvestor(investor);
+		
+		investorConsumptionView.setMachines(machinesDAO.getByInvestorId(investor.getId()));
+		investorConsumptionView.setCircleValidation(investorConsumption.getCircleValidation());
+		investorConsumptionView.setBillGenerated(investorConsumption.getBillGenerated());
+		if(investorConsumption.getBillGenerated()==1){
+			investorConsumptionView.setBillDetailsId(billDetailsDAO.getByConsumptionBifurcationId(investorConsumption.getId()).getId());
+		}
+		
+		return investorConsumptionView;
 	}
 }

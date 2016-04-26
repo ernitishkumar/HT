@@ -26,6 +26,7 @@ import com.ht.beans.InvestorConsumption;
 import com.ht.beans.InvestorConsumptionView;
 import com.ht.beans.Plant;
 import com.ht.beans.User;
+import com.ht.dao.BillDetailsDAO;
 import com.ht.dao.ConsumptionsDAO;
 import com.ht.dao.InvestorConsumptionDAO;
 import com.ht.dao.InvestorsDAO;
@@ -69,8 +70,6 @@ public class InvestorConsumptionController extends HttpServlet{
 						SimpleDateFormat formater = new SimpleDateFormat("dd-MM-YYYY");
 						Date date = new Date();
 						String currentDate = formater.format(date);
-						InvestorsDAO investorsDAO = new InvestorsDAO();
-						MachinesDAO machinesDAO = new MachinesDAO();
 						JsonObject jo=new JsonObject();
 						if(circle!=null){
 							//Getting Investor Wise Consumptions for all the meters under a circle
@@ -111,7 +110,9 @@ public class InvestorConsumptionController extends HttpServlet{
 							}
 							ArrayList<InvestorConsumption> investorConsumptionList = investorConsumptionDAO.getByConsumptionId(consumption.getId());
 							ArrayList<InvestorConsumptionView> investorConsumptionViews= getViewFromList(investorConsumptionList, consumption);
+							
 							JsonElement element = gson.toJsonTree(investorConsumptionViews,new TypeToken<ArrayList<InvestorConsumptionView>>(){}.getType());
+							
 							if(consumption!=null){
 								jo.addProperty("Result", "OK");
 								jo.add("InvestorConsumptionData",element);
@@ -215,6 +216,8 @@ public ArrayList<InvestorConsumptionView> getViewFromList(ArrayList<InvestorCons
 	ArrayList<InvestorConsumptionView> investorConsumptionViews= new ArrayList<InvestorConsumptionView>();
 	InvestorsDAO investorsDAO = new InvestorsDAO();
 	MachinesDAO machinesDAO = new MachinesDAO();
+	BillDetailsDAO billDetailsDAO = new BillDetailsDAO();
+	
 	for(InvestorConsumption investorConsumption:investorConsumptionList){
 		InvestorConsumptionView investorConsumptionView = new InvestorConsumptionView();
 		investorConsumptionView.setId(investorConsumption.getId());
@@ -226,6 +229,9 @@ public ArrayList<InvestorConsumptionView> getViewFromList(ArrayList<InvestorCons
 		investorConsumptionView.setMachines(machinesDAO.getByInvestorId(investor.getId()));
 		investorConsumptionView.setCircleValidation(investorConsumption.getCircleValidation());
 		investorConsumptionView.setBillGenerated(investorConsumption.getBillGenerated());
+		if(investorConsumption.getBillGenerated()==1){
+			investorConsumptionView.setBillDetailsId(billDetailsDAO.getByConsumptionBifurcationId(investorConsumption.getId()).getId());
+		}
 		investorConsumptionViews.add(investorConsumptionView);
 	}
 	return investorConsumptionViews;

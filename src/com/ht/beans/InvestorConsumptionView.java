@@ -12,6 +12,7 @@ public class InvestorConsumptionView {
 	private int circleValidation;
 	private int billGenerated;
 	private List<Machine> machines;
+	private int billDetailsId;
 	
 	public int getId() {
 		return id;
@@ -72,6 +73,28 @@ public class InvestorConsumptionView {
 	 */
 	public void setBillGenerated(int billGenerated) {
 		this.billGenerated = billGenerated;
+	}
+	/**
+	 * @return the billDetailsId
+	 */
+	public int getBillDetailsId() {
+		return billDetailsId;
+	}
+	/**
+	 * @param billDetailsId the billDetailsId to set
+	 */
+	public void setBillDetailsId(int billDetailsId) {
+		this.billDetailsId = billDetailsId;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "InvestorConsumptionView [id=" + id + ", consumption=" + consumption + ", investor=" + investor
+				+ ", activeConsumption=" + activeConsumption + ", reactiveConsumption=" + reactiveConsumption
+				+ ", circleValidation=" + circleValidation + ", billGenerated=" + billGenerated + ", machines="
+				+ machines + ", billDetailsId=" + billDetailsId + "]";
 	}
 	
 }

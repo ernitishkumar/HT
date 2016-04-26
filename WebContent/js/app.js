@@ -51,10 +51,10 @@
                 templateUrl: 'templates/pages/meter/viewbifircationpage.html',
                 controller: 'ViewBifircateReadingsController',
                 controllerAs: 'viewMeterReadingsCtrl'
-            }).when('/viewbill', {
+            }).when('/viewbill/:billDetailsId', {
                 templateUrl: 'templates/pages/meter/viewbill.html',
-                controller: 'ViewBifircateReadingsController',
-                controllerAs: 'viewMeterReadingsCtrl'
+                controller: 'ViewBillController',
+                controllerAs: 'viewBillCtrl'
             }).when('/viewcirclereadings', {
                 templateUrl: 'templates/pages/meter/viewcirclereading.html',
                 controller: 'ViewMeterReadingsController',

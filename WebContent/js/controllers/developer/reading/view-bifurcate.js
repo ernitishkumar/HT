@@ -83,14 +83,17 @@ angular.module("htBillingApp").controller('ViewBifircateReadingsController', ['$
         }).then(function (response) {
         	var result = response.data.Result;
         	if(result === "OK"){
+        		var lastInsertedId = response.data.BillId;
+        		investorData.billDetailsId= lastInsertedId;
         		investorData.generating = false;
         		investorData.billGenerated = true;
+        		console.log("Object after generating bill : ");
         	}
         });
     };
     
-    this.viewBill = function () {
-    	
+    this.viewBill = function (investorData) {
+    	$location.path("/viewbill/"+investorData.billDetailsId);
     };
 
 }]);
