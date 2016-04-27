@@ -40,10 +40,21 @@
                     <table class="table table-bordered">
                         <tbody class="text-center">
                             <tr>
-                                <td colspan="6"><b><p>{{billDetails.investor.name}}</p><p>302, Sai Amrit Apartment,14, Rajaswgram, Chhatribagh, Indore (M.P)</p><p>379, VARDHMAN GRAND PLAZA, PLOT NO.7, MANGALAM PLACE, SECTOR-3, ROHINI, DELHI-110085.</p></b></td>
+                                <td colspan="6">
+                                <b>
+                                <p>{{billDetails.investor.name}}</p>
+                                <!-- <p>302, Sai Amrit Apartment,14, Rajaswgram, Chhatribagh, Indore (M.P)</p>
+                                <p>379, VARDHMAN GRAND PLAZA, PLOT NO.7, MANGALAM PLACE, SECTOR-3, ROHINI, DELHI-110085.</p> -->
+                                </b>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="6"> <b>To,  <br><p>The Superintending Engineer (O&M), M.P.P.K.V.V.Co.Ltd</p></b></td>
+                            </tr>
+                            <tr>
+                                <td>BILL NO. </td>
+                                <td><strong>{{billDetails.billNo}}</strong></td>
+                                <td colspan="4"></td>
                             </tr>
                             <tr>
                                 <td>METER NO</td>
@@ -68,7 +79,7 @@
                                 <td><b>{{billDetails.investorConsumptionView.machines[0].ppaLetterNo}}</b>
                                 </td>
                                 <td>TIN/VAT No</td>
-                                <td colspan="3"><b>{{billDetails.investor.tin}}</b></td>
+                                <td colspan="3"><b>{{billDetails.investor.tin}}/{{billDetails.investor.vat}}</b></td>
                             </tr>
                             <tr>
                                 <td>Investor Name`</td>
