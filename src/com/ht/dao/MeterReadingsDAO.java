@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.ht.beans.MeterDetails;
 import com.ht.beans.MeterReadings;
@@ -20,28 +21,42 @@ public class MeterReadingsDAO {
 		Connection connection = GlobalResources.getConnection();
         boolean added=false;
 		try {
-			PreparedStatement ps = connection
-					.prepareStatement("insert into meter_readings(meter_no, mf, reading_date, active_reading, active_tod1, active_tod2, active_tod3, reactive_q1, reactive_q2, reactive_q3, reactive_q4, ht_cell_validation, circle_cell_validation, developer_validation, discarded_flag, discarded_by, discarded_on) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			ps.setString(1, readings.getMeterNo());
-			ps.setInt(2, readings.getMf());
-			ps.setString(3, readings.getReadingDate());
-			ps.setFloat(4, readings.getActiveEnergy());
-			ps.setFloat(5, readings.getActiveTodOne());
-			ps.setFloat(6, readings.getActiveTodTwo());
-			ps.setFloat(7, readings.getActiveTodThree());
-			ps.setFloat(8, readings.getReactiveQuadrantOne());
-			ps.setFloat(9, readings.getReactiveQuadrantTwo());
-			ps.setFloat(10, readings.getReactiveQuadrantThree());
-			ps.setFloat(11, readings.getReactiveQuadrantFour());
-			ps.setInt(12,0);
-			ps.setInt(13,0);
-			ps.setInt(14,0);
-			ps.setInt(15,0);
-			ps.setString(16,"null");
-			ps.setString(17,"null");
-			ps.executeUpdate();
-			ps.close();
-            added=true;
+				MeterReadings latestInsertedReading = getLatestInsertedByMeterNo(readings.getMeterNo());
+				MeterReadings meterReadings = getCurrentMonthMeterReadings(readings.getMeterNo(), readings.getReadingDate());
+				//Date d1 = new Date(latestInsertedReading.getReadingDate());
+				SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+				Calendar c = Calendar.getInstance();
+				c.setTime(formatter.parse(latestInsertedReading.getReadingDate()));
+				int lastReadingMonth = c.get(Calendar.MONTH)+1;
+				c.setTime(formatter.parse(readings.getReadingDate()));
+				int currentReadingMonth = c.get(Calendar.MONTH)+1;
+				int result = currentReadingMonth - lastReadingMonth;
+				if(meterReadings == null && result == 1 && result == -11){
+					PreparedStatement ps = connection
+							.prepareStatement("insert into meter_readings(meter_no, mf, reading_date, active_reading, active_tod1, active_tod2, active_tod3, reactive_q1, reactive_q2, reactive_q3, reactive_q4, ht_cell_validation, circle_cell_validation, developer_validation, discarded_flag, discarded_by, discarded_on) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					ps.setString(1, readings.getMeterNo());
+					ps.setInt(2, readings.getMf());
+					ps.setString(3, readings.getReadingDate());
+					ps.setFloat(4, readings.getActiveEnergy());
+					ps.setFloat(5, readings.getActiveTodOne());
+					ps.setFloat(6, readings.getActiveTodTwo());
+					ps.setFloat(7, readings.getActiveTodThree());
+					ps.setFloat(8, readings.getReactiveQuadrantOne());
+					ps.setFloat(9, readings.getReactiveQuadrantTwo());
+					ps.setFloat(10, readings.getReactiveQuadrantThree());
+					ps.setFloat(11, readings.getReactiveQuadrantFour());
+					ps.setInt(12,0);
+					ps.setInt(13,0);
+					ps.setInt(14,0);
+					ps.setInt(15,0);
+					ps.setString(16,"null");
+					ps.setString(17,"null");
+					ps.executeUpdate();
+					ps.close();
+		            added=true;
+				}else{
+					added = false;
+				}
 		} catch (SQLException e) {
             added=false;
 			System.out.println("Exception in class : MeterReadingsDAO : method : [insert(Readings)] "+e.getMessage());
@@ -221,7 +236,25 @@ Connection connection = GlobalResources.getConnection();
 			return validation;
 		}
 	
-
+		public MeterReadings getLatestInsertedByMeterNo(String meterNo){
+			Connection connection = GlobalResources.getConnection();
+			MeterReadings readings = new MeterReadings();
+			int id = 0;
+			try {
+				PreparedStatement ps = connection.prepareStatement("select max(id) from meter_readings where meter_no=?");
+	            ps.setString(1,meterNo);
+				ResultSet resultSet = ps.executeQuery();
+				
+				while(resultSet.next()){
+					id = resultSet.getInt(1);
+				}
+				readings = getById(id);
+			} catch (SQLException e) {
+				System.out.println("Exception in class : MeterDetailsDAO : method : [getByMeterNo(String)] "+e.getMessage());
+			}
+			return readings;
+		}
+		
 	public MeterReadings getCurrentMonthMeterReadings(String meterNo, String date){
 			Connection connection = GlobalResources.getConnection();
 			ArrayList<MeterReadings> readings = new ArrayList<MeterReadings>();

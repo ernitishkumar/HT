@@ -75,6 +75,7 @@ angular.module("htBillingApp").controller('MeterReadingController', ['$http', '$
                     $scope.plainmeter = false;
                     $scope.metervalid = true;
                     $scope.meternotvalid = false;
+                    $scope.lastReading = response.data.LastReading;
                 } else {
                     $scope.plainmeter = false;
                     $scope.metervalid = false;
@@ -120,15 +121,27 @@ angular.module("htBillingApp").controller('MeterReadingController', ['$http', '$
                 reactiveTodThree: this.formData.reactiveTodThree,
                 reactiveTodFour: this.formData.reactiveTodFour
             }
-        }).success(function (response) {
+        }).then(function (response) {
             $scope.plainmeter = false;
             $scope.metervalid = false;
             $scope.meternotvalid = false;
-            $location.path("/saved/Meter Reading Saved Successfully!");
+            var result = response.data;
+            if(result.Result === 'Success'){
+            $location.path("/saved/"+result.Message);
+            }else{
+            	alert(result.Message);
+            }
             $scope.formData = {};
         });
     };
 
+    this.isReadingValid = function(input1,input2,input3){
+    	if(input1 > input2){
+    		$scope.input3 = true;
+    	}else{
+    		$scope.input3 = false;
+    	}
+    };
     this.clearForm = function () {
         $scope.plainmeter = false;
         $scope.metervalid = false;

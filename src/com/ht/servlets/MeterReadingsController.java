@@ -55,14 +55,20 @@ public class MeterReadingsController extends HttpServlet{
 						readings.setReactiveQuadrantFour(Float.valueOf(httpServletRequest.getParameter("reactiveTodFour")));
 						boolean inserted=readingsDAO.insert(readings);
 						String result="";
+						JsonObject jo = new JsonObject();
 						if(inserted){
 							System.out.println("Meter Readings inserted.");
-							result="{\"Result\":\"Success\",\"Message\":"+"\"Meter Readings Added Successfully!\""+"}";
+							//result="{\"Result\":\"Success\",\"Message\":"+"\"Meter Readings Added Successfully!\""+"}";
+							jo.addProperty("Result","Success");
+							jo.addProperty("Message", "Meter Readings Added Successfully!");
 						}else{
-							result="{\"Result\":\"Failure\",\"Message\":"+"\"Unable to add Meter Reading! Please try again!\""+"}";
+							//result="{\"Result\":\"Failure\",\"Message\":"+"\"Unable to add Meter Reading! Please try again!\""+"}";
+							jo.addProperty("Result","Failure");
+							jo.addProperty("Message", "Unable to add Meter Reading! Please try again!");
 						}
-						httpServletResponse.setContentType("text/json");
-						httpServletResponse.getWriter().write(result);
+						System.out.println(jo.toString());
+						httpServletResponse.setContentType("application/json");
+						httpServletResponse.getWriter().write(jo.toString());
 					}else if(action.toLowerCase().equals("get")){
 
 					}else if(action.toLowerCase().equals("list")){

@@ -1,18 +1,26 @@
 package com.ht.servlets;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+
 import org.json.simple.JSONObject;
-import com.ht.dao.PlantsDAO;
-import com.ht.dao.MeterDetailsDAO;
-import com.ht.beans.*;
-import com.ht.utility.GlobalResources;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
+import com.ht.beans.MeterDetails;
+import com.ht.beans.MeterReadings;
+import com.ht.beans.Plant;
+import com.ht.beans.User;
+import com.ht.dao.MeterDetailsDAO;
+import com.ht.dao.MeterReadingsDAO;
+import com.ht.dao.PlantsDAO;
+import com.ht.utility.GlobalResources;
 
 public class PlantController extends HttpServlet{
 	private MeterDetailsDAO meterDetailsDAO = GlobalResources.getMeterDetailsDAO();
@@ -36,12 +44,17 @@ public class PlantController extends HttpServlet{
 
 					Plant plant = plantsDAO.getByMainMeterNo(meterno);
 					if(meterDetails!=null && plant!=null){
+						Date d = new Date();
+						MeterReadingsDAO meterReadingsDAO = new MeterReadingsDAO();
+						MeterReadings meterReadings = meterReadingsDAO.getLatestInsertedByMeterNo(meterno);
+						JsonElement element = gson.toJsonTree(meterReadings,new TypeToken<MeterReadings>(){}.getType());
 						obj.put("ValidMeter","Yes");
 						JSONObject obj1 = new JSONObject();
 						obj1.put("MeterNo",plant.getMainMeterNo());
 						obj1.put("Name",plant.getCircle());
 						obj1.put("MF",meterDetails.getMf());
-						obj.put("MeterData",obj1);    
+						obj.put("MeterData",obj1);
+						obj.put("LastReading", element);
 					}else{
 						obj.put("ValidMeter","No");
 						obj.put("MeterData",null);
