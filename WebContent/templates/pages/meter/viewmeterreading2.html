@@ -38,7 +38,7 @@
             <div class="panel-heading text-center">Meter Readings For <strong>{{reading.meterNo}}</strong></div>
             <div class="panel-body">
                 <p class="text-center">
-                    Developer Name: <b>{{reading.plant.developerId}}</b> &nbsp;&nbsp;&nbsp; Mf of Meter: <b>{{reading.currentMeterReading.mf}}</b> &nbsp;&nbsp;&nbsp; Site Location: <b>{{reading.plant.circle|uppercase}}</b> &nbsp;&nbsp;&nbsp;
+                    Developer Name: <b>{{reading.plant.developerId}}</b> &nbsp;&nbsp;&nbsp; Mf of Meter: <b>{{reading.currentMeterReading.mf}}</b> &nbsp;&nbsp;&nbsp; Site Location: <b>{{reading.plant.name|uppercase}}</b> &nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-success" name="validateButton" ng-click="viewMeterReadingsCtrl.validateReading(reading)" ng-hide="reading.currentMeterReading.htCellValidation">Validate Readings</button>
                     &nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-danger" name="discardButton" ng-hide="reading.currentMeterReading.htCellValidation">Discard Readings</button>

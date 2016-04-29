@@ -327,6 +327,8 @@ public class MeterReadingsDAO {
 			String readingDay= null;
 			if(day < 10){
 				readingDay = "0"+day;
+			}else{
+				readingDay = String.valueOf(day);
 			}
 			int year = c.get(Calendar.YEAR);
 			int month = c.get(Calendar.MONTH)+1;

@@ -68,6 +68,7 @@ angular.module("htBillingApp").controller('ViewMeterReadingsController', ['$http
             var result = response.data.Result;
             if (result === 'OK') {
                 $scope.readingData = response.data.Records;
+                console.log($scope.readingData);
                 $scope.readingData.forEach(function (reading) {
                     calculateData(reading);
                 });
