@@ -36,8 +36,9 @@
     <div name="panelsHolder" ng-repeat="reading in readingData" class="container col-md-offset-1 col-md-10">
         <div class="panel panel-success">
             <div class="panel-heading text-center">Meter Readings For {{reading.meterNo}}</div>
-            <div class="panel-body text-center">
-                Developer Name: {{reading.currentMeterReading.nameOfDeveloper|uppercase}} &nbsp;&nbsp;&nbsp; Mf of Meter: {{reading.currentMeterReading.mf}} &nbsp;&nbsp;&nbsp; Location: {{reading.plant.circle|uppercase}} &nbsp;&nbsp;&nbsp;
+            <div class="panel-body">
+             <p class="text-center">
+                Developer Name: {{reading.developer.name|uppercase}} &nbsp;&nbsp;&nbsp; <br><br>Mf of Meter: {{reading.currentMeterReading.mf}} &nbsp;&nbsp;&nbsp; Location: {{reading.plant.circle|uppercase}} &nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn btn-success" name="validateButton" ng-click="viewMeterReadingsCtrl.validateReading(reading)" ng-hide="reading.currentMeterReading.developerValidation">Validate Readings</button>
                 &nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn btn-danger" name="discardButton" ng-hide="reading.currentMeterReading.developerValidation">Discard Readings</button>
@@ -112,6 +113,7 @@
                 <span ng-hide="reading.currentMeterReading.developerValidation" class="label label-danger">Not Validated by Developer</span>
                 <span ng-show="reading.currentMeterReading.circleCellValidation" class="label label-primary">Validated by Circle</span>
                 <span ng-hide="reading.currentMeterReading.circleCellValidation" class="label label-danger">Not Validated by Circle</span>
+           <p>
             </div>
             <!-- Table -->
             <table class="table table-bordered table-hover">

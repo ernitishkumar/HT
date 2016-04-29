@@ -77,6 +77,7 @@ public class MeterReadingsController extends HttpServlet{
 						String circle=(String)httpServletRequest.getParameter("location");
 						System.out.println("Circle is "+circle);
 						PlantsDAO plantsDAO=new PlantsDAO();
+						DevelopersDAO developersDAO = new DevelopersDAO();
 						if(circle!=null){
 							plants = plantsDAO.getByCircle(circle.toLowerCase());
 						}else{
@@ -90,6 +91,7 @@ public class MeterReadingsController extends HttpServlet{
 							String meterNo=p.getMainMeterNo();
 							viewMeterReadings.setMeterNo(meterNo);
 							viewMeterReadings.setPlant(p);
+							viewMeterReadings.setDeveloper(developersDAO.getById(p.getDeveloperId()));
 							viewMeterReadings.setCurrentMeterReading(readingsDAO.getCurrentMonthMeterReadings(meterNo, currentDate));
 							viewMeterReadings.setPreviousMeterReading(readingsDAO.getPreviousMonthMeterReadings(meterNo, currentDate));
 							meterReadingsArray.add(viewMeterReadings);
@@ -156,12 +158,12 @@ public class MeterReadingsController extends HttpServlet{
 									String mmn=p.getMainMeterNo();
 									viewMeterReadings.setMeterNo(mmn);
 									viewMeterReadings.setPlant(p);
+									viewMeterReadings.setDeveloper(developer);
 									MeterReadings currentMeterReadings = readingsDAO.getCurrentMonthMeterReadings(mmn, currentDate);
 									viewMeterReadings.setCurrentMeterReading(readingsDAO.getCurrentMonthMeterReadings(mmn, currentDate));
-
 									viewMeterReadings.setPreviousMeterReading(readingsDAO.getPreviousMonthMeterReadings(mmn, currentDate));
-									System.out.println("plant id : "+p.getId());
-									System.out.println("developer validation : "+currentMeterReadings.getDeveloperValidation());
+/*									System.out.println("plant id : "+p.getId());
+									System.out.println("developer validation : "+currentMeterReadings.getDeveloperValidation());*/
 									if(currentMeterReadings.getDeveloperValidation() == 1){
 										System.out.println("inside if");
 										viewMeterReadings.setConsumption(consumptionsDAO.getBifercationFlagByPlantIdAndDate(p.getId(),currentDate));

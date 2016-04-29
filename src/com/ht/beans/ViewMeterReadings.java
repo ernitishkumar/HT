@@ -11,6 +11,8 @@ public class ViewMeterReadings {
 	private MeterReadings previousMeterReading;
 	
 	private Consumption consumption;
+	
+	private Developer developer;
 
 	public String getMeterNo() {
 		return meterNo;
@@ -51,5 +53,20 @@ public class ViewMeterReadings {
 	public void setConsumption(Consumption consumption) {
 		this.consumption = consumption;
 	}
+
+	/**
+	 * @return the developer
+	 */
+	public Developer getDeveloper() {
+		return developer;
+	}
+
+	/**
+	 * @param developer the developer to set
+	 */
+	public void setDeveloper(Developer developer) {
+		this.developer = developer;
+	}
+	
 	
 	}
