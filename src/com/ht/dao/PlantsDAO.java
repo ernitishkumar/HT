@@ -202,8 +202,7 @@ public class PlantsDAO {
 		} catch (SQLException e) {
 			System.out.println("Exception in class : PlantsDAO : method : [getByMainMeterNo(String)] "+e);
 		}
-		
-		return plantList.get(0);
+		return plantList.size()>0?plantList.get(0):null;
 	}
 	
 	public Plant getByCheckMeterNo(String checkMeterNo){

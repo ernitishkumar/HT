@@ -33,7 +33,7 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <div class="page-header text-center">
-            <h1><span class="glyphicon glyphicon-certificate"></span> Enter Meter Details.</h1>
+            <h1><span class="glyphicon glyphicon-certificate"></span> Enter Meter Readings</h1>
         </div>
 
         <!--Show error messages-->
@@ -44,7 +44,7 @@
         </div>
 
         <!--Form-->
-        <form name="meternoForm" id="meternoForm" ng-submit="readingCtrl.processForm()">
+        <form name="meternoForm" id="meternoForm" ng-submit="readingCtrl.processForm(ae,td1,td2,td3,q1,q2,q3,q4)">
             <div class="form-group has-feedback">
                 <span class="glyphicon glyphicon-asterisk">
                 </span>
@@ -56,16 +56,17 @@
             <hr>
             <div name="meterReadingPanel" ng-show="metervalid">
                 <div class="form-group">
-                    <span class="glyphicon glyphicon-star"></span>
-                    <label>Meter Location:</label>
-                    <input class="form-control" type="text" readonly value="{{formData.location|uppercase}}">
-
+                    <!-- <span class="glyphicon glyphicon-star"></span> -->
+                    <label>Meter Location:  <span class="badge">{{formData.location|uppercase}}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Meter MF:         <span class="badge">{{formData.mf}}</span></span>
+                    </label>
+                    <!-- <input class="form-control" type="text" readonly value="{{formData.location|uppercase}}"> -->
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <span class="glyphicon glyphicon-star"></span>
-                    <label>Meter MF:</label>
+                    <label>Meter MF:         <span class="badge">{{formData.mf}}</span></label>
                     <input class="form-control" type="text" value="{{formData.mf}}" readonly>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <span class="glyphicon glyphicon-calendar"></span>
                     <label>Select Date:</label>
@@ -75,70 +76,87 @@
                         <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
+                    <span class="help-block" ng-show="lastReading">Last month reading date <span class="badge">{{lastReading.readingDate}}</span></span>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="glyphicon glyphicon-pencil"></span>
-                    <label>Enter Active Energy(kwh):</label>
-                    <input class="form-control" type="number" placeholder="Active Energy" ng-model="readingCtrl.formData.activeEnergy" ng-blur="readingCtrl.isReadingValid(readingCtrl.formData.activeEnergy,lastReading.activeEnergy,'activeEnergy')" required step="0.01">
-                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="readingValid" ng-hide="!readingValid"></span>
-                	<span class="glyphicon glyphicon-remove form-control-feedback" style="color:red"  ng-show="!readingValid" ng-hide="readingValid"></span>
-                	 <div class="form-control-addon">Previous ActiveEnergy: {{lastReading.activeEnergy}}</div>
+                    <label>Active Energy(KWH):</label>
+                    <input class="form-control" type="number" placeholder="Enter Current Month Active Energy" ng-model="readingCtrl.formData.activeEnergy" 
+                    ng-blur="ae=readingCtrl.isReadingValid(readingCtrl.formData.activeEnergy,lastReading.activeEnergy);aen=!ae" 
+                    required step="0.01" ng-change='error = null'>
+                    <span class="help-block" ng-show="lastReading">Last month active energy <span class="badge">{{lastReading.activeEnergy}}</span></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="ae"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="aen"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="glyphicon glyphicon-pencil"></span>
                     <label>Enter Active Tod 1:</label>
-                    <input class="form-control" type="number" placeholder="Tod 1" ng-model="readingCtrl.formData.activeTodOne" ng-blur="readingCtrl.isReadingValid(readingCtrl.formData.activeTodOne,lastReading.activeTodOne,'activeTodOne')" required step="0.01">
-                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="readingValid" ng-hide="!readingValid"></span>
-                	<span class="glyphicon glyphicon-remove form-control-feedback" style="color:red"  ng-show="!readingValid" ng-hide="readingValid"></span>
-                	<div class="form-control-addon">Previous Active Tod 1: {{lastReading.activeTodOne}}</div>
+                    <input class="form-control" type="number" placeholder="Enter Current Month Tod 1" ng-model="readingCtrl.formData.activeTodOne" 
+                    ng-blur="td1=readingCtrl.isReadingValid(readingCtrl.formData.activeTodOne,lastReading.activeTodOne,'activeTodOne');td1n=!td1" 
+                    ng-change='error = null' required step="0.01">
+                    <span class="help-block" ng-show="lastReading">Last month tod1 <span class="badge">{{lastReading.activeTodOne}}</span></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="td1"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="td1n"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="glyphicon glyphicon-pencil"></span>
                     <label>Enter Active Tod 2:</label>
-                    <input class="form-control" type="number" placeholder="Tod 2" ng-model="readingCtrl.formData.activeTodTwo" ng-blur="readingCtrl.isReadingValid(readingCtrl.formData.activeTodTwo,lastReading.activeTodTwo,'activeTodTwo')" required step="0.01">
-                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="readingValid" ng-hide="!readingValid"></span>
-                	<span class="glyphicon glyphicon-remove form-control-feedback" style="color:red"  ng-show="!readingValid" ng-hide="readingValid"></span>
-                	<div class="form-control-addon">Previous Active Tod 2: {{lastReading.activeTodTwo}}</div>
+                    <input class="form-control" type="number" placeholder="Enter Current Month Tod 2" ng-model="readingCtrl.formData.activeTodTwo" 
+                    ng-blur="td2=readingCtrl.isReadingValid(readingCtrl.formData.activeTodTwo,lastReading.activeTodTwo,'activeTodTwo');td2n=!td2" 
+                    ng-change='error = null' required step="0.01">
+                    <span class="help-block" ng-show="lastReading">Last month tod2 <span class="badge">{{lastReading.activeTodTwo}}</span></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="td2"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="td2n"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="glyphicon glyphicon-pencil "></span>
                     <label>Enter Active Tod 3:</label>
-                    <input class="form-control " type="number" placeholder="Tod 3" ng-model="readingCtrl.formData.activeTodThree" ng-blur="readingCtrl.isReadingValid(readingCtrl.formData.activeTodThree,lastReading.activeTodThree,'activeTodThree')" required step="0.01">
-                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="readingValid" ng-hide="!readingValid"></span>
-                	<span class="glyphicon glyphicon-remove form-control-feedback" style="color:red"  ng-show="!readingValid" ng-hide="readingValid"></span>
-                	<div class="form-control-addon">Previous Active Tod 3: {{lastReading.activeTodThree}}</div>
+                    <input class="form-control " type="number" placeholder="Enter Current Month Tod 3" ng-model="readingCtrl.formData.activeTodThree" 
+                    ng-blur="td3=readingCtrl.isReadingValid(readingCtrl.formData.activeTodThree,lastReading.activeTodThree,'activeTodThree');td3n=!td3" 
+                    ng-change='error = null' required step="0.01">
+                    <span class="help-block" ng-show="lastReading">Last month tod3 <span class="badge">{{lastReading.activeTodThree}}</span></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="td3"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="td3n"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="glyphicon glyphicon-pencil"></span>
                     <label>Enter Reactive Quadrant 1:</label>
-                    <input class="form-control" type="number" placeholder="Reactive Quadrant 1" ng-model="readingCtrl.formData.reactiveTodOne" ng-blur="readingCtrl.isReadingValid(readingCtrl.formData.reactiveTodOne,lastReading.reactiveQuadrantOne,'reactiveQuadrantOne')" required step="0.01">
-                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="readingValid" ng-hide="!readingValid"></span>
-                	<span class="glyphicon glyphicon-remove form-control-feedback" style="color:red"  ng-show="!readingValid" ng-hide="readingValid"></span>
-                	<div class="form-control-addon">Previous Reactive Q1: {{lastReading.reactiveQuadrantOne}}</div>
+                    <input class="form-control" type="number" placeholder="Enter Current Month Reactive Quadrant 1" ng-model="readingCtrl.formData.reactiveTodOne" 
+                    ng-blur="q1=readingCtrl.isReadingValid(readingCtrl.formData.reactiveTodOne,lastReading.reactiveQuadrantOne,'reactiveQuadrantOne');q1n=!q1" 
+                    ng-change='error = null' required step="0.01">
+                    <span class="help-block" ng-show="lastReading">Last month reactive Q1 <span class="badge">{{lastReading.reactiveQuadrantOne}}</span></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="q1"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="q1n"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="glyphicon glyphicon-pencil"></span>
                     <label>Enter Reactive Quadrant 2:</label>
-                    <input class="form-control" type="number" placeholder="Reactive Quadrant 2" ng-model="readingCtrl.formData.reactiveTodTwo" ng-blur="readingCtrl.isReadingValid(readingCtrl.formData.reactiveTodTwo,lastReading.reactiveQuadrantTwo,'reactiveQuadrantTwo')" required step="0.01">
-                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="readingValid" ng-hide="!readingValid"></span>
-                	<span class="glyphicon glyphicon-remove form-control-feedback" style="color:red"  ng-show="!readingValid" ng-hide="readingValid"></span>
-                	<div class="form-control-addon">Previous Reactive Q2: {{lastReading.reactiveQuadrantTwo}}</div>
+                    <input class="form-control" type="number" placeholder="Enter Current Month Reactive Quadrant 2" ng-model="readingCtrl.formData.reactiveTodTwo" 
+                    ng-blur="q2=readingCtrl.isReadingValid(readingCtrl.formData.reactiveTodTwo,lastReading.reactiveQuadrantTwo,'reactiveQuadrantTwo');q2n=!q2" 
+                    ng-change='error = null' required step="0.01">
+                    <span class="help-block" ng-show="lastReading">Last month reactive Q2 <span class="badge">{{lastReading.reactiveQuadrantTwo}}</span></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="q2"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="q2n"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="glyphicon glyphicon-pencil "></span>
                     <label>Enter Reactive Quadrant 3:</label>
-                    <input class="form-control " type="number" placeholder="Reactive Quadrant 3" ng-model="readingCtrl.formData.reactiveTodThree" ng-blur="readingCtrl.isReadingValid(readingCtrl.formData.reactiveTodThree,lastReading.reactiveQuadrantThree,'reactiveQuadrantThree')" required step="0.01">
-                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="readingValid" ng-hide="!readingValid"></span>
-                	<span class="glyphicon glyphicon-remove form-control-feedback" style="color:red"  ng-show="!readingValid" ng-hide="readingValid"></span>
-                	<div class="form-control-addon">Previous Reactive Q3: {{lastReading.reactiveQuadrantThree}}</div>
+                    <input class="form-control " type="number" placeholder="Enter Current Month Reactive Quadrant 3" ng-model="readingCtrl.formData.reactiveTodThree" 
+                    ng-blur="q3=readingCtrl.isReadingValid(readingCtrl.formData.reactiveTodThree,lastReading.reactiveQuadrantThree,'reactiveQuadrantThree');q3n=!q3" 
+                    ng-change='error = null' required step="0.01">
+                    <span class="help-block" ng-show="lastReading">Last month reactive Q3 <span class="badge">{{lastReading.reactiveQuadrantThree}}</span></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="q3"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="q3n"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="glyphicon glyphicon-pencil "></span>
                     <label>Enter Reactive Quadrant 4:</label>
-                    <input class="form-control " type="number" placeholder="Reactive Quadrant 4" ng-model="readingCtrl.formData.reactiveTodFour" ng-blur="readingCtrl.isReadingValid(readingCtrl.formData.reactiveTodFour,lastReading.reactiveQuadrantFour,'reactiveQuadrantFour')" required step="0.01">
-                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="readingValid" ng-hide="!readingValid"></span>
-                	<span class="glyphicon glyphicon-remove form-control-feedback" style="color:red"  ng-show="!readingValid" ng-hide="readingValid"></span>
-                	<div class="form-control-addon">Previous Reactive Q4: {{lastReading.reactiveQuadrantFour}}</div>
+                    <input class="form-control " type="number" placeholder="Enter Reactive Quadrant 4" ng-model="readingCtrl.formData.reactiveTodFour" 
+                    ng-blur="q4=readingCtrl.isReadingValid(readingCtrl.formData.reactiveTodFour,lastReading.reactiveQuadrantFour,'reactiveQuadrantFour');q4n=!q4" 
+                    ng-change='error = null' required step="0.01">
+                    <span class="help-block" ng-show="lastReading">Last month reactive Q4 <span class="badge">{{lastReading.reactiveQuadrantFour}}</span></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="q4"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="q4n"></span>
                 </div>
                 <div class="form-group ">
                     <div class="col-md-6 ">
@@ -147,7 +165,7 @@
                         </button>
                     </div>
                     <div class="col-md-6 ">
-                        <button class="btn btn-danger btn-lg btn-block " type="reset" ng-click="readingCtrl.clearForm()">
+                        <button class="btn btn-danger btn-lg btn-block " type="reset" ng-click="readingCtrl.clearForm();ae=aen=td1=td1n=td2=td2n=td3=td3n=q1=q1n=q2=q2n=q3=q3n=q4=q4n=false">
                             Clear
                         </button>
                     </div>

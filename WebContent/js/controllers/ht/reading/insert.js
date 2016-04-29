@@ -90,58 +90,69 @@ angular.module("htBillingApp").controller('MeterReadingController', ['$http', '$
 
     };
 
-    this.processForm = function () {
-        var d = new Date(this.formData.date);
-        var year = d.getFullYear();
-        var month = d.getMonth() + 1;
+    this.processForm = function (ae,td1,td2,td3,q1,q2,q3,q4) {
+ 
+    	if(ae && td1 && td2 && td3 && q1 && q2 && q3 && q4){
+    		var d = new Date(this.formData.date);
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
 
-        if (month < 10) {
-            month = "0" + month;
-        }
-        var day = d.getDate();
-        if (day < 10) {
-            day = "0" + day;
-        }
-        var readingDate = day + "-" + month + "-" + year;
-        $http({
-            method: 'GET',
-            url: 'MeterReadingsController',
-            params: {
-                action: 'create',
-                meterno: this.formData.meterno,
-                mf: $scope.formData.mf,
-                readingDate: readingDate,
-                readingTime: d.getTime(),
-                activeEnergy: this.formData.activeEnergy,
-                activeTodOne: this.formData.activeTodOne,
-                activeTodTwo: this.formData.activeTodTwo,
-                activeTodThree: this.formData.activeTodThree,
-                reactiveTodOne: this.formData.reactiveTodOne,
-                reactiveTodTwo: this.formData.reactiveTodTwo,
-                reactiveTodThree: this.formData.reactiveTodThree,
-                reactiveTodFour: this.formData.reactiveTodFour
+            if (month < 10) {
+                month = "0" + month;
             }
-        }).then(function (response) {
-            $scope.plainmeter = false;
-            $scope.metervalid = false;
-            $scope.meternotvalid = false;
-            var result = response.data;
-            if(result.Result === 'Success'){
-            $location.path("/saved/"+result.Message);
-            }else{
-            	alert(result.Message);
+            var day = d.getDate();
+            if (day < 10) {
+                day = "0" + day;
             }
-            $scope.formData = {};
-        });
+            var readingDate = day + "-" + month + "-" + year;
+            $http({
+                method: 'GET',
+                url: 'MeterReadingsController',
+                params: {
+                    action: 'create',
+                    meterno: this.formData.meterno,
+                    mf: $scope.formData.mf,
+                    readingDate: readingDate,
+                    readingTime: d.getTime(),
+                    activeEnergy: this.formData.activeEnergy,
+                    activeTodOne: this.formData.activeTodOne,
+                    activeTodTwo: this.formData.activeTodTwo,
+                    activeTodThree: this.formData.activeTodThree,
+                    reactiveTodOne: this.formData.reactiveTodOne,
+                    reactiveTodTwo: this.formData.reactiveTodTwo,
+                    reactiveTodThree: this.formData.reactiveTodThree,
+                    reactiveTodFour: this.formData.reactiveTodFour
+                }
+            }).then(function (response) {
+                $scope.plainmeter = false;
+                $scope.metervalid = false;
+                $scope.meternotvalid = false;
+                var result = response.data;
+                if(result.Result === 'Success'){
+                 $location.path("/saved/"+result.Message);
+                }else{
+                	alert(result.Message);
+                }
+                $scope.formData = {};
+            });
+    	}else{
+    		$scope.error = "Current month's readings should be greater than previous month's readings!"
+    	}
+    
     };
 
-    this.isReadingValid = function(input1,input2,input3){
-    	if(input1 > input2){
-    		$scope.input3 = true;
+    this.isReadingValid = function(input1,input2){
+        if(input1 === null || input1 === undefined){
+        	return false;
+        }else if(input2 === null || input2 === undefined){
+        	return true;
+        }else if(input1 >= input2){
+    		return true;
     	}else{
-    		$scope.input3 = false;
+    		return false;
     	}
     };
+    
     this.clearForm = function () {
         $scope.plainmeter = false;
         $scope.metervalid = false;

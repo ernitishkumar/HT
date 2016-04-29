@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.ht.beans.MeterDetails;
 import com.ht.beans.MeterReadings;
@@ -34,35 +35,32 @@ public class PlantController extends HttpServlet{
 		if(user!=null){
 			String action=(String)httpServletRequest.getParameter("action");
 			System.out.println("Got Action as : "+action);
-			JSONObject obj = new JSONObject();
 			if(action!=null){
 				if(action.toLowerCase().equals("get")){
 					String meterno=(String)httpServletRequest.getParameter("meterno");
 					System.out.println("Inside if for get with meter : "+meterno);
 					MeterDetails meterDetails = meterDetailsDAO.getByMeterNo(meterno);
 					PlantsDAO plantsDAO=new PlantsDAO();
-
 					Plant plant = plantsDAO.getByMainMeterNo(meterno);
+					JsonObject jo = new JsonObject();
 					if(meterDetails!=null && plant!=null){
-						Date d = new Date();
 						MeterReadingsDAO meterReadingsDAO = new MeterReadingsDAO();
 						MeterReadings meterReadings = meterReadingsDAO.getLatestInsertedByMeterNo(meterno);
 						JsonElement element = gson.toJsonTree(meterReadings,new TypeToken<MeterReadings>(){}.getType());
-						obj.put("ValidMeter","Yes");
-						JSONObject obj1 = new JSONObject();
-						obj1.put("MeterNo",plant.getMainMeterNo());
-						obj1.put("Name",plant.getCircle());
-						obj1.put("MF",meterDetails.getMf());
-						obj.put("MeterData",obj1);
-						obj.put("LastReading", element);
+						jo.addProperty("ValidMeter","Yes");
+						JsonObject meterData = new JsonObject();
+						meterData.addProperty("MeterNo", plant.getMainMeterNo());
+						meterData.addProperty("Name",plant.getCircle());
+						meterData.addProperty("MF",meterDetails.getMf());
+						jo.add("MeterData",meterData);
+						jo.add("LastReading", element);
 					}else{
-						obj.put("ValidMeter","No");
-						obj.put("MeterData",null);
+						jo.addProperty("ValidMeter","No");
+						jo.add("MeterData",null);
 					}
-
-					System.out.println("Sent String is :"+obj.toString());
-					httpServletResponse.setContentType("text/json");
-					httpServletResponse.getWriter().print(obj.toString());
+					//System.out.println("Sent String is :"+jo.toString());
+					httpServletResponse.setContentType("application/json");
+					httpServletResponse.getWriter().print(jo.toString());
 				}else if(action.toLowerCase().equals("list")){
 
 				}else if(action.toLowerCase().equals("create")||action.toLowerCase().equals("update")){
@@ -77,11 +75,10 @@ public class PlantController extends HttpServlet{
 				}
 
 			}else{
-				//System.out.println("Error coming here");
-				//String error="{\"Result\":\"ERROR\",\"Message\":"+"Wrong Action"+"}";
-				JSONObject error = new JSONObject();
-				error.put("Result","Error");
-				error.put("Message","Wrong Action");
+				JsonObject error = new JsonObject();
+				error.addProperty("Result","Error");
+				error.addProperty("Message","Wrong Action");
+				httpServletResponse.setContentType("application/json");
 				httpServletResponse.getWriter().print(error.toString());
 			}
 		}else{
