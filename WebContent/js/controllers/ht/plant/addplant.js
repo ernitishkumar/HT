@@ -26,6 +26,22 @@ angular.module("htBillingApp").controller('AddPlantController', ['$http', '$scop
 
     checkUser();
 
+    var getDevelopers = function () {
+
+        $http({
+            method: 'GET',
+            url: 'DeveloperController',
+            params: {
+                action: 'getalldeveloper',
+            }
+        }).then(function (response) {
+            $scope.developers = response.data;
+            console.log( response.data);
+            alert(response.data);
+        });
+    };
+    
+    getDevelopers();
     this.logout = function () {
         $http({
             method: 'GET',
@@ -71,6 +87,7 @@ angular.module("htBillingApp").controller('AddPlantController', ['$http', '$scop
         });
     };
 
+    
     this.clearForm = function () {
         $scope.formData = {};
     };
