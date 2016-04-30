@@ -40,7 +40,7 @@ public class MeterReadingsController extends HttpServlet{
 				System.out.println("Got Action : "+action);
 				if(action!=null){
 					if(action.toLowerCase().equals("create")){
-						System.out.println("Comming in create");
+						//System.out.println("Comming in create");
 						MeterReadings readings=new MeterReadings();
 						readings.setMeterNo((String)httpServletRequest.getParameter("meterno"));
 						readings.setMf(Integer.parseInt(httpServletRequest.getParameter("mf")));
@@ -75,7 +75,7 @@ public class MeterReadingsController extends HttpServlet{
 						ArrayList<ViewMeterReadings> meterReadingsArray = new ArrayList<ViewMeterReadings>();
 						ArrayList<Plant> plants=null;
 						String circle=(String)httpServletRequest.getParameter("location");
-						System.out.println("Circle is "+circle);
+						//System.out.println("Circle is "+circle);
 						PlantsDAO plantsDAO=new PlantsDAO();
 						DevelopersDAO developersDAO = new DevelopersDAO();
 						if(circle!=null){
@@ -101,7 +101,7 @@ public class MeterReadingsController extends HttpServlet{
 						JsonObject jo=new JsonObject();
 						String listData=jsonArray.toString();
 						//System.out.println("List of readings in json : "+listData); //remove after testing
-						String json="{\"Result\":\"OK\",\"Records\":"+listData+"}";
+						//String json="{\"Result\":\"OK\",\"Records\":"+listData+"}";
 						//System.out.println("Sending Json response as : "+json);
 						jo.addProperty("Result","OK");
 						jo.add("Records",jsonArray);
@@ -125,7 +125,7 @@ public class MeterReadingsController extends HttpServlet{
 								ConsumptionsDAO consumptionsDAO = new ConsumptionsDAO();
 							}
 							else if(role.equalsIgnoreCase("developer")){
-								System.out.println("Updating id "+id);
+								//System.out.println("Updating id "+id);
 								validated=readingsDAO.updateDeveloperValidation(id,1); 
 							}
 						}

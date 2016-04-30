@@ -42,7 +42,7 @@ public class ConsumptionsController extends HttpServlet{
 						String plantCode=(String)httpServletRequest.getParameter("plantCode");
 						String meterReadingId=(String)httpServletRequest.getParameter("meterReadingId");
 
-						System.out.println("Consumption data from front end : "+meterNo+" "+activeConsumption+" "+reactiveConsumption+" "+plantId+" "+plantCode+" "+meterReadingId);
+						//System.out.println("Consumption data from front end : "+meterNo+" "+activeConsumption+" "+reactiveConsumption+" "+plantId+" "+plantCode+" "+meterReadingId);
 
 						SimpleDateFormat formater = new SimpleDateFormat("dd-MM-YYYY");
 						Date date = new Date();

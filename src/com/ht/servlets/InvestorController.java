@@ -32,7 +32,7 @@ public class InvestorController extends HttpServlet{
 			if(action!=null){
 				if(action.toLowerCase().equals("getinvestorforbifurcation")){
 					String plantId=(String)httpServletRequest.getParameter("plantId");
-					System.out.println("Inside if for get with plant id : "+plantId);
+					//System.out.println("Inside if for get with plant id : "+plantId);
 					if(plantId!=null){
 						InvestorPlantMappingDAO investorPlantMappingDAO=new InvestorPlantMappingDAO();
 						ArrayList<InvestorPlantMapping> investorPlantMappings = investorPlantMappingDAO.getByPlantId(Integer.parseInt(plantId.trim()));

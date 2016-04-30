@@ -24,7 +24,11 @@ public class ValidateSession extends HttpServlet {
     private UserRolesDAO userRolesDAO = new UserRolesDAO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ValidateSession Called");
-        
+		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		if(ipAddress == null){
+			ipAddress = request.getRemoteAddr();
+		}
+		System.out.println("Validating from IP : "+ipAddress);
 		HttpSession userSession=request.getSession();
 		User user=(User)userSession.getAttribute("User");
 		JSONObject jsonObject=new JSONObject();
@@ -37,9 +41,9 @@ public class ValidateSession extends HttpServlet {
 		jsonObject.put("region",userRole.getRegion());
 		jsonObject.put("circle",userRole.getCircle());
 		jsonObject.put("division",userRole.getDivision());
-		System.out.println("ValidateSession output : "+jsonObject.toString());
+		//System.out.println("ValidateSession output : "+jsonObject.toString());
 		}else{
-			System.out.println("Backdoor Entry!!!!!");
+			System.out.println("Backdoor Entry!!!!! from IP : "+ipAddress);
 			jsonObject.put("username",null);
 		    jsonObject.put("password",null);
 		    jsonObject.put("name",null);

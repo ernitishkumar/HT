@@ -42,7 +42,7 @@ public class BillingController extends HttpServlet{
 					String consumptionId=(String)httpServletRequest.getParameter("consumptionId");
 					String investorId=(String)httpServletRequest.getParameter("investorId");
 					String bifurcationId=(String)httpServletRequest.getParameter("bifurcationId");
-					System.out.println("Consumption data from front end : "+consumptionId+" "+investorId+" "+bifurcationId);
+					//System.out.println("Consumption data from front end : "+consumptionId+" "+investorId+" "+bifurcationId);
 
 					SimpleDateFormat formater = new SimpleDateFormat("dd-MM-YYYY");
 					Date date = new Date();
@@ -89,7 +89,7 @@ public class BillingController extends HttpServlet{
 						billDetails.setTotalAmount(totalAmount);
 						billDetails.setTotalAmountRoundOff(totalAmountRoundOff);
 
-						System.out.println("Created bill : "+billDetails);
+						//System.out.println("Created bill : "+billDetails);
 
 						lastInsertedId = billDetailsDAO.insert(billDetails);
 						if(lastInsertedId != -1){
@@ -138,7 +138,7 @@ public class BillingController extends HttpServlet{
 						if(billDetails!=null && billDetailsView!=null){
 							billFound = true;
 							element = gson.toJsonTree(billDetailsView,new TypeToken<BillDetailsView>(){}.getType());
-							System.out.println("Sending bill as : \n "+element.toString());
+							//System.out.println("Sending bill as : \n "+element.toString());
 						}
 					}
 					JsonObject jo = new JsonObject();

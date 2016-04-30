@@ -24,12 +24,17 @@ public class Login extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Login Called");
+		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		if(ipAddress == null){
+			ipAddress = request.getRemoteAddr();
+		}
+		System.out.println("Requesting from IP : "+ipAddress);
+		
 		UserRolesDAO userRolesDAO = new UserRolesDAO();
 		UserRoles userRoles = null;
 		String username=(String)request.getParameter("username");
 		String password=(String)request.getParameter("password");
-        System.out.println("Username and password from request : "+username+" "+password);
-		Result result=new Result();
+        Result result=new Result();
         HttpSession userSession=request.getSession();
 		if(username!=null && password!=null){
 			User user=userDAO.getByUsername(username);

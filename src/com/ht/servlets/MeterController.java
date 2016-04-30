@@ -23,7 +23,7 @@ public class MeterController extends HttpServlet{
 		System.out.println("MeterController Started");
 		HttpSession userSession=httpServletRequest.getSession();
 		User user=(User)userSession.getAttribute("User");
-		System.out.println("User from session : "+user);
+		//System.out.println("User from session : "+user);
 		if(user!=null){
 			String action=(String)httpServletRequest.getParameter("action");
 			System.out.println("Got Action : "+action);

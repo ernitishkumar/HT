@@ -51,7 +51,7 @@ public class InvestorConsumptionController extends HttpServlet{
 					InvestorConsumptionDAO investorConsumptionDAO = new InvestorConsumptionDAO();
 					if(action.toLowerCase().equals("get")){
 						String consumptionId = (String)httpServletRequest.getParameter("consumptionId");
-						System.out.println("consumption id is : "+consumptionId);
+						//System.out.println("consumption id is : "+consumptionId);
 						ArrayList<InvestorConsumption> consumptionList= investorConsumptionDAO.getByConsumptionId(Integer.parseInt(consumptionId));
 						System.out.println("active consumption : "+consumptionList.get(0).getActiveConsumption());
 						JsonElement element = gson.toJsonTree(consumptionList,new TypeToken<ArrayList<InvestorConsumption>>(){}.getType());
@@ -65,7 +65,7 @@ public class InvestorConsumptionController extends HttpServlet{
 						String meterNo=(String)httpServletRequest.getParameter("meterNo");
 						String plantId=(String)httpServletRequest.getParameter("plantId");
 						
-						System.out.println("InvestorConsumptionController Circle is "+circle);
+						//System.out.println("InvestorConsumptionController Circle is "+circle);
 						
 						SimpleDateFormat formater = new SimpleDateFormat("dd-MM-YYYY");
 						Date date = new Date();
@@ -74,7 +74,7 @@ public class InvestorConsumptionController extends HttpServlet{
 						if(circle!=null){
 							//Getting Investor Wise Consumptions for all the meters under a circle
 							//for validation by circle user
-							System.out.println("InvestorConsumptionController Circle is "+circle);
+							//System.out.println("InvestorConsumptionController Circle is "+circle);
 							PlantsDAO plantsDAO=new PlantsDAO();
 							ArrayList<Plant> plants = plantsDAO.getByCircle(circle.toLowerCase());
 							ArrayList<ConsumptionBifurcationView> bifurcations = new ArrayList<ConsumptionBifurcationView>();
@@ -225,7 +225,6 @@ public ArrayList<InvestorConsumptionView> getViewFromList(ArrayList<InvestorCons
 		investorConsumptionView.setActiveConsumption(investorConsumption.getActiveConsumption());
 		investorConsumptionView.setReactiveConsumption(investorConsumption.getReactiveConsumption());
 		Investor investor = investorsDAO.getById(investorConsumption.getInvestorId());
-		System.out.println("Investor ID and name : "+investor.getId()+" "+investor.getName());
 		investorConsumptionView.setInvestor(investor);
 		investorConsumptionView.setMachines(machinesDAO.getByInvestorId(investor.getId()));
 		investorConsumptionView.setCircleValidation(investorConsumption.getCircleValidation());

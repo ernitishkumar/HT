@@ -38,7 +38,7 @@ public class PlantController extends HttpServlet{
 			if(action!=null){
 				if(action.toLowerCase().equals("get")){
 					String meterno=(String)httpServletRequest.getParameter("meterno");
-					System.out.println("Inside if for get with meter : "+meterno);
+					//System.out.println("Inside if for get with meter : "+meterno);
 					MeterDetails meterDetails = meterDetailsDAO.getByMeterNo(meterno);
 					PlantsDAO plantsDAO=new PlantsDAO();
 					Plant plant = plantsDAO.getByMainMeterNo(meterno);
