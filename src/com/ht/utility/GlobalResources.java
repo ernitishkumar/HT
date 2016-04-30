@@ -22,7 +22,7 @@ public class GlobalResources {
 		try {
 			if(connection==null){
 				Class.forName("com.mysql.jdbc.Driver");
-				connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/ht","ht","ht");	
+				connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/ht_test","ht_test","ht");	
 			}
 		} catch (SQLException exception) {
 			System.out.println("Not able to connect to the Database "+exception.getMessage());

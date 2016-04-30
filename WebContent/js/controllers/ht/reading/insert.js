@@ -80,6 +80,7 @@ angular.module("htBillingApp").controller('MeterReadingController', ['$http', '$
                     $scope.plainmeter = false;
                     $scope.metervalid = false;
                     $scope.meternotvalid = true;
+                    $scope.error="Meter No is not installed on any plant.Provide a different number";
                 }
             });
         } else {

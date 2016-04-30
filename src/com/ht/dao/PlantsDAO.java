@@ -137,6 +137,7 @@ public class PlantsDAO {
 			ps.close();
 		} catch (SQLException e) {
 			System.out.println("Exception in class : PlantsDAO : method : [getByDeveloperId(int)] "+e);
+			e.printStackTrace();
 		}
 		
 		return plantList;
@@ -305,6 +306,7 @@ public class PlantsDAO {
 			}
 		} catch (SQLException e) {
 			System.out.println("Exception in class : PlantsDAO : method : [plantMapper(ResultSet)] "+e);
+			e.printStackTrace();
 		}
 		return plantList;
 	}

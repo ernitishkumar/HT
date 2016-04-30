@@ -49,7 +49,7 @@
                 <span class="glyphicon glyphicon-asterisk">
                 </span>
                 <label for="meterno">Enter Meter No.</label>
-                <input type='text' name='meterno' id='meterno' class='form-control' ng-class="{validmeter:metervalid,invalidmeter:meternotvalid,unchecked:plainmeter}" placeholder="Meter No." ng-model='readingCtrl.formData.meterno' ng-blur="readingCtrl.isValidMeterno()" required>
+                <input type='text' name='meterno' id='meterno' class='form-control' ng-class="{validmeter:metervalid,invalidmeter:meternotvalid,unchecked:plainmeter}" placeholder="Enter Meter No." ng-model='readingCtrl.formData.meterno' ng-blur="readingCtrl.isValidMeterno()" ng-change="error=null" required>
                 <span class="glyphicon glyphicon-ok form-control-feedback" style="color:green" ng-show="metervalid"></span>
                 <span class="glyphicon glyphicon-remove form-control-feedback" style="color:red" ng-show="meternotvalid"></span>
             </div>

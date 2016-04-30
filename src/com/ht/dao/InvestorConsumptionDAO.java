@@ -39,20 +39,18 @@ public class InvestorConsumptionDAO {
 		boolean added=false;
 		Connection connection = GlobalResources.getConnection();
 		try {
-			PreparedStatement ps = connection.prepareStatement("update investor_consumption set consumption_id=?, investor_id =? , active_consumption = ?, reactive_consumption=?,bill_generated=?,circle_validation=? where id = ?");
-			ps.setInt(1,investorConsumption.getConsumptionId());
-			ps.setInt(2, investorConsumption.getInvestorId());
-			ps.setFloat(3, investorConsumption.getActiveConsumption());
-			ps.setFloat(4, investorConsumption.getReactiveConsumption());
-			ps.setInt(5, investorConsumption.getBillGenerated());
-			ps.setInt(6, investorConsumption.getCircleValidation());
-			ps.setInt(7, investorConsumption.getId());
+			PreparedStatement ps = connection.prepareStatement("update investor_consumption set active_consumption = ?, reactive_consumption=?,bill_generated=?,circle_validation=? where id = ?");
+			ps.setFloat(1, investorConsumption.getActiveConsumption());
+			ps.setFloat(2, investorConsumption.getReactiveConsumption());
+			ps.setInt(3, investorConsumption.getBillGenerated());
+			ps.setInt(4, investorConsumption.getCircleValidation());
+			ps.setInt(5, investorConsumption.getId());
 			ps.executeUpdate();
 			ps.close();
 			added=true;
 		} catch (SQLException e) {
 			added=false;
-			System.out.println("Exception in class : InvestorConsumptionDAO : method : [update(Investors)] "+e.getMessage());
+			System.out.println("Exception in class : InvestorConsumptionDAO : method : [update(InvestorConsumption)] "+e.getMessage());
 		}
 		return added;
 	}
@@ -133,8 +131,8 @@ public class InvestorConsumptionDAO {
 			while(rs.next()){
                 InvestorConsumption investorConsumtion = new InvestorConsumption();
 				investorConsumtion.setId(rs.getInt(1));
-				investorConsumtion.setConsumptionId(rs.getInt(2));
-				investorConsumtion.setInvestorId(rs.getInt(3));
+				investorConsumtion.setConsumptionId(rs.getInt(3));
+				investorConsumtion.setInvestorId(rs.getInt(2));
 				investorConsumtion.setActiveConsumption(rs.getFloat(4));
 				investorConsumtion.setReactiveConsumption(rs.getFloat(5));
 				investorConsumtion.setCircleValidation(rs.getInt(6));

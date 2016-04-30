@@ -111,7 +111,7 @@ public class ConsumptionsDAO {
 		} catch (SQLException e) {
 			System.out.println("Exception in class : ConsumptionsDAO : method : [getById(int)] "+e.getMessage());
 		}
-		return consumptionsList.get(0);
+		return consumptionsList.size()>0?consumptionsList.get(0):null;
 	}
 	
 	public ArrayList<Consumption> getByPlantId(int plantId){

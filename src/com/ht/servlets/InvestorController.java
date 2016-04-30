@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import com.ht.dao.PlantsDAO;
 import com.ht.dao.InvestorsDAO;
+import com.ht.dao.MachinesDAO;
 import com.ht.dao.InvestorPlantMappingDAO;
 import com.ht.beans.*;
 import com.ht.utility.GlobalResources;
@@ -29,41 +30,32 @@ public class InvestorController extends HttpServlet{
 			System.out.println("Got Action as : "+action);
 			JSONObject jsonObject = new JSONObject();
 			if(action!=null){
-				if(action.toLowerCase().equals("get")){
+				if(action.toLowerCase().equals("getinvestorforbifurcation")){
 					String plantId=(String)httpServletRequest.getParameter("plantId");
 					System.out.println("Inside if for get with plant id : "+plantId);
 					if(plantId!=null){
 						InvestorPlantMappingDAO investorPlantMappingDAO=new InvestorPlantMappingDAO();
 						ArrayList<InvestorPlantMapping> investorPlantMappings = investorPlantMappingDAO.getByPlantId(Integer.parseInt(plantId.trim()));
 						InvestorsDAO investorsDAO = new InvestorsDAO();
-						BifircationData bifircationData=new BifircationData();
-						ArrayList<Investor> investors=new ArrayList<Investor>();
+						MachinesDAO machinesDAO = new MachinesDAO();
+						ArrayList<InvestorConsumptionView> investors=new ArrayList<InvestorConsumptionView>();
 						for(InvestorPlantMapping ipm:investorPlantMappings){
 							Investor investor=investorsDAO.getById(ipm.getInvestorId());
-							investors.add(investor);
+							InvestorConsumptionView investorConsumptionView = new InvestorConsumptionView();
+							investorConsumptionView.setInvestor(investor);
+							investorConsumptionView.setMachines(machinesDAO.getByInvestorId(investor.getId()));
+							investors.add(investorConsumptionView);
 						}
-						JsonElement element = gson.toJsonTree(investors,new TypeToken<ArrayList<Investor>>(){}.getType());
+						JsonElement element = gson.toJsonTree(investors,new TypeToken<ArrayList<InvestorConsumptionView>>(){}.getType());
 						JsonArray jsonArray = element.getAsJsonArray();
 						JsonObject jo=new JsonObject();
 						jo.addProperty("Result", "OK");
-						jo.add("Investors",jsonArray);
+						jo.add("InvestorsData",jsonArray);
+						System.out.print("getinvestorforbifurcation : "+jo.toString());
 						httpServletResponse.setContentType("application/json");
 						httpServletResponse.getWriter().print(jo.toString());    
 					}
-
-				}else if(action.toLowerCase().equals("list")){
-
-				}else if(action.toLowerCase().equals("create")||action.toLowerCase().equals("update")){
-
-					if(action.toLowerCase().equals("create")){
-
-					}else if(action.toLowerCase().equals("update")){
-
-					}
-				}else if(action.toLowerCase().equals("delete")){
-
 				}
-
 			}else{
 				//System.out.println("Error coming here");
 				//String error="{\"Result\":\"ERROR\",\"Message\":"+"Wrong Action"+"}";

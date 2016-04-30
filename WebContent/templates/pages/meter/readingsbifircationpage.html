@@ -76,16 +76,16 @@
                                             <td><strong>KWH Export</strong></td>
                                             <td><strong>RKVAH Consumed</strong></td>
                                         </tr>
-                                        <tr ng-repeat="investor in investors" class="text-center">
+                                        <tr ng-repeat="investorData in investorsData" class="text-center">
                                             <td>{{index}}</td>
-                                            <td>{{investor.code}}</td>
-                                            <td></td>
-                                            <td>{{investor.name}}</td>
+                                            <td>{{investorData.investor.code}}</td>
+                                            <td>{{investorData.machines[0].capacity}}</td>
+                                            <td>{{investorData.investor.name}}</td>
                                             <td>
-                                                <input type="number" ng-model="investor.activeConsumption">
+                                                <input type="number" ng-model="investorData.activeConsumption">
                                             </td>
                                             <td>
-                                                <input type="number" ng-model="investor.reactiveConsumption">
+                                                <input type="number" ng-model="investorData.reactiveConsumption">
                                             </td>
                                         </tr>
                                         <tr>

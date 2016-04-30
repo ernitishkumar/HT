@@ -44,17 +44,14 @@ angular.module("htBillingApp").controller('BifircateReadingsController', ['$http
             method: 'GET',
             url: 'InvestorController',
             params: {
-                action: "GET",
+                action: "getinvestorforbifurcation",
                 plantId: plantId
             }
         }).then(function (response) {
             var result = response.data.Result;
             if (result === "OK") {
-                $scope.investors = response.data.Investors;
-                console.log($scope.investors);
-                $scope.investors.forEach(function (investor) {
-                    investor.investorId = investor.id;
-                });
+                $scope.investorsData = response.data.InvestorsData;
+                console.log($scope.investorsData);
             }
         });
         $http({
@@ -73,17 +70,18 @@ angular.module("htBillingApp").controller('BifircateReadingsController', ['$http
     };
 
     this.saveDistribution = function () {
-        var investors = $scope.investors;
+        var investors = $scope.investorsData;
         var consumption = $scope.consumption;
         var totalActive = 0;
         var totalReactive = 0;
-        investors.forEach(function (investor) {
-            totalActive += investor.activeConsumption;
-            totalReactive += investor.reactiveConsumption;
-            investor.circleValidation = 0;
-            investor.billGenerated = 0;
-            investor.consumptionId = consumption.id;
+        investors.forEach(function (item) {
+            totalActive += item.activeConsumption;
+            totalReactive += item.reactiveConsumption;
+            item.consumptionId = consumption.id;
+            item.investorId = item.investor.id;
         });
+        console.log("After preparing bean");
+        console.log(investors);
         if (totalActive === consumption.activeConsumption && totalReactive === consumption.reactiveConsumption) {
             $http({
                 method: 'POST',

@@ -43,18 +43,18 @@
             <div class="panel-body">
                 <p class="text-center">
                     Developer Name: {{consumptionData.plant.developerId}} &nbsp;&nbsp;&nbsp; Site Location: {{consumptionData.plant.address|uppercase}} &nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-success" name="validateButton" ng-hide="consumptionData.investorBifurcations[0].circleValidation" ng-click="circleConsumptionValidationController.validateReading(consumptionData)">Validate Consumptions</button>
+                    <button type="button" class="btn btn-success" name="validateButton" ng-show="consumptionData.consumption.consumptionBifercated" ng-hide="consumptionData.investorBifurcations[0].circleValidation" ng-click="circleConsumptionValidationController.validateReading(consumptionData)">Validate Consumptions</button>
                     &nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-danger" name="discardButton" ng-hide="consumptionData.investorBifurcations[0].circleValidation">Discard Consumptions</button>
+                    <button type="button" class="btn btn-danger" name="discardButton" ng-show="consumptionData.consumption.consumptionBifercated" ng-hide="consumptionData.investorBifurcations[0].circleValidation">Discard Consumptions</button>
                     <br>
                     <br>
-                    <span ng-show="consumptionData.consumption.consumptionBifercated" class="label label-primary">Validated by HTCell</span>
+                    <!-- <span ng-show="consumptionData.consumption.consumptionBifercated" class="label label-primary">Validated by HTCell</span>
                     <span ng-hide="consumptionData.consumption.consumptionBifercated" class="label label-danger">Not Validated by HTCell</span>
                     <span ng-show="consumptionData.consumption.consumptionBifercated" class="label label-primary">Validated by Developer</span>
                     <span ng-hide="consumptionData.consumption.consumptionBifercated" class="label label-danger">Not Validated by Developer</span>
                     <span ng-show="consumptionData.investorBifurcations[0].circleValidation" class="label label-primary">Validated by Circle</span>
                     <span ng-hide="consumptionData.investorBifurcations[0].circleValidation" class="label label-danger">Not Validated by Circle</span>
-                    <span ng-show="consumptionData.investorBifurcations[0].circleValidation && !consumptionData.investorBifurcations[0].billGenerated" class="label label-success">Bill Not Generated</span>
+                    <span ng-show="consumptionData.investorBifurcations[0].circleValidation && !consumptionData.investorBifurcations[0].billGenerated" class="label label-success">Bill Not Generated</span> -->
                 </p>
             </div>
             <!--Panel Body ends-->

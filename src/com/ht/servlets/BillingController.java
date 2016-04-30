@@ -105,7 +105,7 @@ public class BillingController extends HttpServlet{
 								month=""+m;
 							}
 							System.out.println("Calendar date : "+calendar.getTime()+" month : "+calendar.get(Calendar.MONTH));
-							String billNo = consumption.getMeterNo()+calendar.get(Calendar.YEAR)+month+lastInsertedId;
+							String billNo = "MPWZHT"+calendar.get(Calendar.YEAR)+month+lastInsertedId;
 							System.out.println("bill no for id : "+lastInsertedId+"  is : "+billNo);
 							billDetails.setBillNo(billNo);
 							billDetailsDAO.update(billDetails);

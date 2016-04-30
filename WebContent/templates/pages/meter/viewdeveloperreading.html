@@ -45,66 +45,6 @@
                 &nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn btn-primary" data-toggle="modal" ng-show="reading.currentMeterReading.developerValidation && !reading.consumption.consumptionBifercated" ng-click="viewMeterReadingsCtrl.getInvestorsData(reading)">Bifurcate Readings</button>
                 <button type="button" class="btn btn-success" data-toggle="modal" ng-show="reading.consumption.consumptionBifercated" ng-click="viewMeterReadingsCtrl.viewInvestorsData(reading)">View Bifurcation & Bill</button>
-              
-              <!--   <div class="modal fade" id="bifircationModal">
-                    <div class="modal-dialog custom-class">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Bifircate Readings</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table class="table table-bordered">
-                                            <tbody class="text-center">
-                                                <tr>
-                                                    <td>SITE NAME: <b>{{reading.plant.circle|uppercase}}</b></td>
-                                                    <td>METER NO</td>
-                                                    <td><b>{{reading.meterNo}}</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>MONTH(PERIOD)</td>
-                                                    <td>KWH EXPORT</td>
-                                                    <td>RKVAH CONSUMED</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>{{reading.previousMeterReading.readingDate}} - {{reading.currentMeterReading.readingDate}}</b></td>
-                                                    <td><b>{{reading.activeEnergyConsumption}}</b></td>
-                                                    <td><b>{{reading.quadrantOneConsumption+reading.quadrantTwoConsumption+reading.quadrantThreeConsumption+reading.quadrantFourConsumption}}</b></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>GENERATIONS DETAILS</h4>
-                                        <table class="table table-condensed table-bordered">
-                                            <tbody class="text-center">
-                                                <tr>
-                                                    <td><strong>S.No</strong></td>
-                                                    <td><strong>Code</strong></td>
-                                                    <td><strong>Capacity(MW)</strong></td>
-                                                    <td><strong>Investor Name</strong></td>
-                                                    <td><strong>KWH Export</strong></td>
-                                                    <td><strong>RKVAH Consumed</strong></td>
-                                                </tr>
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default btn-lg" data-dismiss="modal" type="button">Close</button>
-                                <button class="btn btn-primary btn-lg" type="button">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                -->
                 <br>
                 <br> 
                 <span ng-show="reading.currentMeterReading.htCellValidation" class="label label-primary">Validated by HTCell</span>

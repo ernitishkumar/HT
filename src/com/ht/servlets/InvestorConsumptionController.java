@@ -225,6 +225,7 @@ public ArrayList<InvestorConsumptionView> getViewFromList(ArrayList<InvestorCons
 		investorConsumptionView.setActiveConsumption(investorConsumption.getActiveConsumption());
 		investorConsumptionView.setReactiveConsumption(investorConsumption.getReactiveConsumption());
 		Investor investor = investorsDAO.getById(investorConsumption.getInvestorId());
+		System.out.println("Investor ID and name : "+investor.getId()+" "+investor.getName());
 		investorConsumptionView.setInvestor(investor);
 		investorConsumptionView.setMachines(machinesDAO.getByInvestorId(investor.getId()));
 		investorConsumptionView.setCircleValidation(investorConsumption.getCircleValidation());

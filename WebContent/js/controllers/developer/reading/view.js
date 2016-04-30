@@ -48,7 +48,6 @@ angular.module("htBillingApp").controller('DeveloperViewMeterReadingsController'
             var result = response.data.Result;
             if (result === 'OK') {
                 $scope.readingData = response.data.Records;
-                console.log($scope.readingData);
                 $scope.readingData.forEach(function (reading) {
                     calculateData(reading);
                 });
@@ -128,7 +127,6 @@ angular.module("htBillingApp").controller('DeveloperViewMeterReadingsController'
                         }
                     }).then(function (response) {
                         var result = response.data;
-                        alert("Consumption inserted " + result.Result);
                     });
                 }
 
