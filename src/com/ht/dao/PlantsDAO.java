@@ -10,8 +10,9 @@ import com.ht.utility.GlobalResources;
 
 public class PlantsDAO {
 
-	public void insert(Plant plant){
+	public boolean insert(Plant plant){
 		Connection connection = GlobalResources.getConnection();
+		boolean added=false;
 		try {
 			PreparedStatement ps = connection
 					.prepareStatement("insert into plants(code, name , address, Contact_no, Contact_person, email, commissioned_date, type, circuit_voltage, injecting_substation, feeder_name, region, circle, division, main_meter_no, check_meter_no, standby_meter_no, developer_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -35,9 +36,12 @@ public class PlantsDAO {
 			ps.setInt(18, plant.getDeveloperId());
 			ps.executeUpdate();
 			ps.close();
+			added=true;
 		} catch (SQLException e) {
+			added=false;
 			System.out.println("Exception in class : PlantDetailsDAO : method : [insert(PlantDetails)] "+e);
 		}
+		return added;
 	}
 	
 	public void update(Plant plant){

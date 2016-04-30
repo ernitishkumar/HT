@@ -42,6 +42,10 @@ angular.module("htBillingApp").controller('HomeController', ['$http', '$scope', 
     this.loadAddMeterPage = function () {
         $location.path("/addmeter");
     };
+    
+    this.loadAddPlantPage = function () {
+        $location.path("/addplant");
+    };
 
     this.loadHome = function () {
         $location.path("/home");

@@ -1,0 +1,140 @@
+<div class="navbar navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:void(0);">HTBilling</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="javascript:void(0);" ng-click="addPlantCtrl.loadHome()">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span>{{user.name}}<strong class="caret"></strong></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="javascript:void(0);"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" ng-click="addPlantCtrl.logout()"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="page-header text-center">
+            <h1><span class="glyphicon glyphicon-certificate"></span> Enter Plant Details.</h1>
+        </div>
+
+        <!--Show error messages
+        <div align='center'>
+            <h3><span class="label label-danger" ng-show="error">{{error}}</span>
+        </h3>
+            <br>
+        </div>-->
+
+        <!--Form-->
+        <form name="plantForm" id="plantForm" ng-submit="addPlantCtrl.processForm()">
+            <div class="form-group has-feedback">
+                <label>Enter Plant Code</label>
+                <input class="form-control" type="text" placeholder="Plant Code" ng-model="addPlantCtrl.formData.plantCode" required>
+            </div>
+            <div class="form-group">
+                <label>Name:</label>
+                <input class="form-control" type="text" placeholder="Name" ng-model="addPlantCtrl.formData.name" required>
+
+            </div>
+            <div class="form-group">
+                <label>Address:</label>
+                <input class="form-control" type="text" placeholder="Address" ng-model="addPlantCtrl.formData.address" required>
+            </div>
+            <div class="form-group">
+                <label>Contact No:</label>
+                <input class="form-control" type="text" placeholder="Contact No" ng-model="addPlantCtrl.formData.contactNo" required>
+            </div>
+            <div class="form-group">
+                <label>Contact Person:</label>
+                <input class="form-control" type="text" placeholder="Contact Person" ng-model="addPlantCtrl.formData.contactPerson" required>
+            </div>
+            <div class="form-group">
+                <label>email:</label>
+                <input class="form-control" type="text" placeholder="E-MAIL" ng-model="addPlantCtrl.formData.email" required>
+            </div>
+            <div class="form-group">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    <label>Commissioned Date:</label>
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='date' class="form-control" ng-model="addPlantCtrl.formData.commissionedDate" required/>
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            <div class=" form-group ">
+                <label>Type:</label>
+                <input class="form-control " type="text" placeholder="Type" ng-model="addPlantCtrl.formData.type" required>
+            </div>
+            <div class="form-group">
+                <label>Circuit Voltage:</label>
+                <input class="form-control" type="text" placeholder="Circuit Voltage" ng-model="addPlantCtrl.formData.circuitVoltage" required>
+            </div>
+            <div class="form-group">
+                <label>Injecting Substation:</label>
+                <input class="form-control" type="text" placeholder="Injecting Substation" ng-model="addPlantCtrl.formData.injectingSubstation" required>
+            </div>
+            <div class="form-group">
+                <label>Feeder Name:</label>
+                <input class="form-control" type="text" placeholder="Feeder Name" ng-model="addPlantCtrl.formData.feederName" required>
+            </div>
+            <div class="form-group">
+                <label>Region:</label>
+                <input class="form-control" type="text" placeholder="Region" ng-model="addPlantCtrl.formData.region" required>
+            </div>
+            <div class="form-group">
+                <label>Circle:</label>
+                <input class="form-control" type="text" placeholder="Circle" ng-model="addPlantCtrl.formData.circle" required>
+            </div>
+            <div class="form-group">
+                <label>Division:</label>
+                <input class="form-control" type="text" placeholder="Division" ng-model="addPlantCtrl.formData.division" required>
+            </div>
+            <div class="form-group">
+                <label>Main Meter No:</label>
+                <input class="form-control" type="text" placeholder="Main Meter No" ng-model="addPlantCtrl.formData.mainMeterNo" required>
+            </div>
+            <div class="form-group">
+                <label>Check Meter No:</label>
+                <input class="form-control" type="text" placeholder="Check Meter No" ng-model="addPlantCtrl.formData.checkMeterNo" required>
+            </div>
+            <div class="form-group">
+                <label>Standby Meter No:</label>
+                <input class="form-control" type="text" placeholder="Standby Meter No" ng-model="addPlantCtrl.formData.standbyMeterNo" required>
+            </div>
+            <div class="form-group">
+                <label>Developer Id:</label>
+                <input class="form-control" type="text" placeholder="Developer ID" ng-model="addPlantCtrl.formData.developerId" required>
+            </div>
+            <div class="form-group ">
+                <div class="col-md-6 ">
+                    <button type="submit " class="btn btn-success btn-lg btn-block ">
+                        <span class="glyphicon glyphicon-flash "></span> Add Plant!
+                    </button>
+                </div>
+                <div class="col-md-6 ">
+                    <button class="btn btn-danger btn-lg btn-block " type="reset" ng-click="addPlantCtrl.clearForm()">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

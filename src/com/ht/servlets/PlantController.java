@@ -66,7 +66,36 @@ public class PlantController extends HttpServlet{
 				}else if(action.toLowerCase().equals("create")||action.toLowerCase().equals("update")){
 
 					if(action.toLowerCase().equals("create")){
-
+						Plant plant = new Plant();
+						PlantsDAO plantsDAO = new PlantsDAO();
+						plant.setCode((String)httpServletRequest.getParameter("plantCode"));
+						plant.setName((String)httpServletRequest.getParameter("name"));
+						plant.setAddress((String)httpServletRequest.getParameter("address"));
+						plant.setContactNo((String)httpServletRequest.getParameter("contactNo"));
+						plant.setContactPerson((String)httpServletRequest.getParameter("contactPerson"));
+						plant.setEmail((String)httpServletRequest.getParameter("email"));
+						plant.setCommissionedDate((String)httpServletRequest.getParameter("commissionedDate"));
+						plant.setType((String)httpServletRequest.getParameter("type"));
+						plant.setCircuitVoltage((String)httpServletRequest.getParameter("circuitVoltage"));
+						plant.setInjectingSubstation((String)httpServletRequest.getParameter("injectingSubstation"));
+						plant.setFeederName((String)httpServletRequest.getParameter("feederName"));
+						plant.setRegion((String)httpServletRequest.getParameter("region"));
+						plant.setCircle((String)httpServletRequest.getParameter("circle"));
+						plant.setDivision((String)httpServletRequest.getParameter("division"));
+						plant.setMainMeterNo((String)httpServletRequest.getParameter("mainMeterNo"));
+						plant.setCheckMeterNo((String)httpServletRequest.getParameter("checkMeterNo"));
+						plant.setStandByMeterNo((String)httpServletRequest.getParameter("standbyMeterNo"));
+						plant.setDeveloperId(Integer.parseInt(httpServletRequest.getParameter("developerId")));
+						boolean inserted = plantsDAO.insert(plant);
+						String result="";
+						if(inserted){
+							System.out.println("Meter Readings inserted.");
+							result="{\"Result\":\"Success\",\"Message\":"+"\"Plant Added Successfully!\""+"}";
+						}else{
+							result="{\"Result\":\"Failure\",\"Message\":"+"\"Unable to add Plant Please try again!\""+"}";
+						}
+						httpServletResponse.setContentType("text/json");
+						httpServletResponse.getWriter().write(result);
 					}else if(action.toLowerCase().equals("update")){
 
 					}
