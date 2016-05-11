@@ -15,10 +15,10 @@ public class DevelpersDAO {
 		boolean added=false;
 		Connection connection = GlobalResources.getConnection();
 		try {
-			PreparedStatement ps = connection.prepareStatement("insert into developers (name, cin, office_address, office_contact_no, office_contact_person, office_email, site_address, site_contact_no, site_contact_person, site_email) valus(?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement("insert into developers (name, cin, office_address, office_contact_no, office_contact_person, office_email, site_address, site_contact_no, site_contact_person, site_email, username) values(?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, developer.getName());
 			ps.setString(2, developer.getCin());
-			ps.setString(3, developer.getOfficeAddess());
+			ps.setString(3, developer.getOfficeAddress());
 			ps.setString(4, developer.getOfficeContactNo());
 			ps.setString(5, developer.getOfficeContactPerson());
 			ps.setString(6, developer.getOfficeEmail());
@@ -26,12 +26,14 @@ public class DevelpersDAO {
 			ps.setString(8, developer.getSiteContactNo());
 			ps.setString(9, developer.getSiteContactPerson());
 			ps.setString(10, developer.getSiteEmail());
+			ps.setString(11,developer.getUsername());
 			ps.executeUpdate();
 			ps.close();
             added=true;
 		} catch (SQLException e) {
 			added=false;
 			System.out.println("Exception in class : DevelpersDAO : method : [insert(Developer)] "+e.getMessage());
+			e.printStackTrace();
 		}
 		return added;
 	}
@@ -40,10 +42,10 @@ public class DevelpersDAO {
 		boolean updated=false;
 		Connection connection = GlobalResources.getConnection();
 		try {
-			PreparedStatement ps = connection.prepareStatement("update developers set name=?, cin=?, office_address=?, office_contact_no=?, office_contact_person=?, office_email=?, site_address=?, site_contact_no=?, site_contact_person=?, site_email=? where id =?");
+			PreparedStatement ps = connection.prepareStatement("update developers set name=?, cin=?, office_address=?, office_contact_no=?, office_contact_person=?, office_email=?, site_address=?, site_contact_no=?, site_contact_person=?, site_email=? username=? where id =?");
 			ps.setString(1, developer.getName());
 			ps.setString(2, developer.getCin());
-			ps.setString(3, developer.getOfficeAddess());
+			ps.setString(3, developer.getOfficeAddress());
 			ps.setString(4, developer.getOfficeContactNo());
 			ps.setString(5, developer.getOfficeContactPerson());
 			ps.setString(6, developer.getOfficeEmail());
@@ -51,13 +53,15 @@ public class DevelpersDAO {
 			ps.setString(8, developer.getSiteContactNo());
 			ps.setString(9, developer.getSiteContactPerson());
 			ps.setString(10, developer.getSiteEmail());
-			ps.setInt(11, developer.getId());
+			ps.setString(11,developer.getUsername());
+			ps.setInt(12, developer.getId());
 			ps.executeUpdate();
 			ps.close();
 			updated=true;
 		} catch (SQLException e) {
 			updated=false;
 			System.out.println("Exception in class : DevelpersDAO : method : [update(Developer)] "+e.getMessage());
+			e.printStackTrace();
 		}
 		return updated;
 	}
@@ -118,6 +122,20 @@ public class DevelpersDAO {
 		return developersArray.get(0);
 	}
 	
+	public Developer getByUsername(String username){
+		ArrayList<Developer> developersArray = new ArrayList<Developer>();
+		Connection connection = GlobalResources.getConnection();
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from developers where username = ?");
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			developersArray = developerMapper(rs);
+		} catch (SQLException e) {
+			System.out.println("Exception in class : DevelpersDAO : method : [getByCin(String)] "+e.getMessage());
+		}
+		return developersArray.get(0);
+	}
+	
 	private ArrayList<Developer> developerMapper(ResultSet resultSet){
 		ArrayList<Developer> developersArray = new ArrayList<Developer>();
 		Developer developer = new Developer();
@@ -126,7 +144,7 @@ public class DevelpersDAO {
 				developer.setId(resultSet.getInt(1));
 				developer.setName(resultSet.getString(2));
 				developer.setCin(resultSet.getString(3));
-				developer.setOfficeAddess(resultSet.getString(4));
+				developer.setOfficeAddress(resultSet.getString(4));
 				developer.setOfficeContactNo(resultSet.getString(5));
 				developer.setOfficeContactPerson(resultSet.getString(6));
 				developer.setOfficeEmail(resultSet.getString(7));
@@ -134,10 +152,12 @@ public class DevelpersDAO {
 				developer.setSiteContactNo(resultSet.getString(9));
 				developer.setSiteContactPerson(resultSet.getString(10));
 				developer.setSiteEmail(resultSet.getString(11));
+				developer.setUsername(resultSet.getString(12));
 				developersArray.add(developer);
 			}
 		} catch (SQLException e) {
 			System.out.println("Exception in class : DevelpersDAO : method : [developerMapper(ResultSet)] "+e.getMessage());
+			
 		}
 		return developersArray;
 	}

@@ -74,7 +74,8 @@ public class PlantController extends HttpServlet{
 						plant.setContactNo((String)httpServletRequest.getParameter("contactNo"));
 						plant.setContactPerson((String)httpServletRequest.getParameter("contactPerson"));
 						plant.setEmail((String)httpServletRequest.getParameter("email"));
-						plant.setCommissionedDate((String)httpServletRequest.getParameter("commissionedDate"));
+						System.out.println(httpServletRequest.getParameter("commissionedDate").trim());
+						plant.setCommissionedDate((String)httpServletRequest.getParameter("commissionedDate").trim());
 						plant.setType((String)httpServletRequest.getParameter("type"));
 						plant.setCircuitVoltage((String)httpServletRequest.getParameter("circuitVoltage"));
 						plant.setInjectingSubstation((String)httpServletRequest.getParameter("injectingSubstation"));
@@ -85,6 +86,7 @@ public class PlantController extends HttpServlet{
 						plant.setMainMeterNo((String)httpServletRequest.getParameter("mainMeterNo"));
 						plant.setCheckMeterNo((String)httpServletRequest.getParameter("checkMeterNo"));
 						plant.setStandByMeterNo((String)httpServletRequest.getParameter("standbyMeterNo"));
+						System.out.println(httpServletRequest.getParameter("developerId"));
 						plant.setDeveloperId(Integer.parseInt(httpServletRequest.getParameter("developerId")));
 						boolean inserted = plantsDAO.insert(plant);
 						String result="";

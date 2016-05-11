@@ -89,6 +89,18 @@ public class MeterDetailsDAO {
 		return meterDetails;
 	}
 	
+	public ArrayList<MeterDetails> getMetersNotInUse(){
+		ArrayList<MeterDetails> meterDetails = new ArrayList<MeterDetails>();
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from meter_details where meter_no not in (select main_meter_no from plants) and meter_no not in (select check_meter_no from plants) and meter_no not in (select standby_meter_no from plants)");
+			ResultSet resultSet = ps.executeQuery();
+			meterDetails = resultSetMapper(resultSet);
+		} catch (SQLException e) {
+			System.out.println("Exception in class : MeterDetailsDAO : method : [getMetersNotInUse] "+ e);
+		}
+		return meterDetails;
+	}
+	
 	public MeterDetails getByMeterNo(String meterNo){
 		MeterDetails meterDetails = new MeterDetails();
 		try {

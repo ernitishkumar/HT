@@ -1,28 +1,32 @@
 package com.ht.servlets;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import com.ht.dao.MeterReadingsDAO;
-import com.ht.beans.MeterReadings;
-import com.ht.utility.GlobalResources;
-import com.ht.beans.ViewMeterReadings;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import com.google.gson.*;
-import com.google.gson.reflect.*;
+
 import org.json.simple.JSONObject;
-import com.ht.dao.DevelopersDAO;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.ht.beans.Developer;
-import com.ht.dao.PlantsDAO;
-import com.ht.dao.ConsumptionsDAO;
+import com.ht.beans.MeterReadings;
 import com.ht.beans.Plant;
 import com.ht.beans.User;
+import com.ht.beans.ViewMeterReadings;
+import com.ht.dao.ConsumptionsDAO;
+import com.ht.dao.DevelopersDAO;
+import com.ht.dao.MeterReadingsDAO;
+import com.ht.dao.PlantsDAO;
+import com.ht.utility.GlobalResources;
 
 public class MeterReadingsController extends HttpServlet{
 
@@ -54,7 +58,6 @@ public class MeterReadingsController extends HttpServlet{
 						readings.setReactiveQuadrantThree(Float.valueOf(httpServletRequest.getParameter("reactiveTodThree")));
 						readings.setReactiveQuadrantFour(Float.valueOf(httpServletRequest.getParameter("reactiveTodFour")));
 						boolean inserted=readingsDAO.insert(readings);
-						String result="";
 						JsonObject jo = new JsonObject();
 						if(inserted){
 							System.out.println("Meter Readings inserted.");

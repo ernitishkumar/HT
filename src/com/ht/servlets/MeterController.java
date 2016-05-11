@@ -13,6 +13,9 @@ import com.ht.beans.*;
 import org.json.simple.JSONObject;
 import com.ht.utility.GlobalResources;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 public class MeterController extends HttpServlet{
 	private MeterDetailsDAO meterDetailsDAO = GlobalResources.getMeterDetailsDAO();
@@ -65,8 +68,15 @@ public class MeterController extends HttpServlet{
 					}else if(action.toLowerCase().equals("update")){
 
 					}
-				}else if(action.toLowerCase().equals("delete")){
-
+				}else if(action.toLowerCase().equals("getmetersnotinuse")){
+					MeterDetailsDAO meterDetailsDAO = new MeterDetailsDAO();
+					ArrayList<MeterDetails> meterDetails = meterDetailsDAO.getMetersNotInUse();
+					JsonObject jo = new JsonObject();
+					JsonElement element = gson.toJsonTree(meterDetails,new TypeToken<ArrayList<MeterDetails>>(){}.getType());
+					jo.add("MetersNotInUse",element);
+					httpServletResponse.setContentType("application/json");
+					httpServletResponse.getWriter().print(jo.toString());
+					System.out.println(jo.toString());
 				}
 
 			}else{

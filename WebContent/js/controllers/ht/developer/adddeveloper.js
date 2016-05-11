@@ -1,4 +1,4 @@
-angular.module("htBillingApp").controller('AddPlantController', ['$http', '$scope', '$location', function ($http, $scope, $location) {
+angular.module("htBillingApp").controller('AddDeveloperController', ['$http', '$scope', '$location', function ($http, $scope, $location) {
 
     $scope.user = {};
 
@@ -26,7 +26,7 @@ angular.module("htBillingApp").controller('AddPlantController', ['$http', '$scop
 
     checkUser();
 
-    var getDevelopers = function () {
+    /*var getDevelopers = function () {
 
         $http({
             method: 'GET',
@@ -57,7 +57,7 @@ angular.module("htBillingApp").controller('AddPlantController', ['$http', '$scop
     };
     
     getMetersNotInUse();
-    
+*/    
     this.logout = function () {
         $http({
             method: 'GET',
@@ -72,45 +72,32 @@ angular.module("htBillingApp").controller('AddPlantController', ['$http', '$scop
     };
 
     this.processForm = function () {
-    	var d = new Date(this.formData.commissionedDate);
-        var year = d.getFullYear();
-        var month = d.getMonth() + 1;
-
-        if (month < 10) {
-            month = "0" + month;
-        }
-        var day = d.getDate();
-        if (day < 10) {
-            day = "0" + day;
-        }
-        var readingDate = day + "-" + month + "-" + year;
         $http({
             method: 'GET',
-            url: 'PlantController',
+            url: 'DeveloperController',
             params: {
                 action: 'create',
-                plantCode: this.formData.plantCode,
-                name: this.formData.name,
-                address: this.formData.address,
-                contactNo: this.formData.contactNo,
-                contactPerson: this.formData.contactPerson,
-                email: this.formData.email,
-                commissionedDate: readingDate,
-                type: this.formData.type,
-                circuitVoltage: this.formData.circuitVoltage,
-                injectingSubstation: this.formData.injectingSubstation,
-                feederName: this.formData.feederName,
-                region: this.formData.region,
-                circle: this.formData.circle,
-                division: this.formData.division,
-                mainMeterNo: this.formData.mainMeterNo,
-                checkMeterNo: this.formData.checkMeterNo,
-                standbyMeterNo: this.formData.standbyMeterNo,
-                developerId: this.formData.developerId
+                developerName: this.formData.developerName,
+                cin: this.formData.cin,
+                officeAddress: this.formData.officeAddress,
+                officeContactNo: this.formData.officeContactNo,
+                officeContactPerson: this.formData.officeContactPerson,
+                officeEmail: this.formData.officeEmail,
+                siteAddress: this.formData.siteAddress,
+                siteContactNo: this.formData.siteContactNo,
+                siteContactPerson: this.formData.siteContactPerson,
+                siteEmail: this.formData.siteEmail,
+                username: this.formData.username
             }
-        }).success(function (response) {
-            $location.path("/saved/Plant Saved Successfully!");
-            $scope.formData = {};
+        }).then(function (response) {
+        	 var result = response.data;
+        	 console.log(result);
+             if(result.Result === 'Success'){
+	            $location.path("/saved/"+result.Message);
+             }else{
+             	alert(result.Message);
+             }
+             $scope.formData = {};
         });
     };
 

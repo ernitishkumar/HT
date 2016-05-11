@@ -15,10 +15,10 @@ public class DevelopersDAO {
 		boolean added=false;
 		Connection connection = GlobalResources.getConnection();
 		try {
-			PreparedStatement ps = connection.prepareStatement("insert into developers (name, cin, office_address, office_contact_no, office_contact_person, office_email, site_address, site_contact_no, site_contact_person, site_email,username) valus(?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement("insert into developers (name, cin, office_address, office_contact_no, office_contact_person, office_email, site_address, site_contact_no, site_contact_person, site_email, username) values(?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, developer.getName());
 			ps.setString(2, developer.getCin());
-			ps.setString(3, developer.getOfficeAddess());
+			ps.setString(3, developer.getOfficeAddress());
 			ps.setString(4, developer.getOfficeContactNo());
 			ps.setString(5, developer.getOfficeContactPerson());
 			ps.setString(6, developer.getOfficeEmail());
@@ -33,6 +33,7 @@ public class DevelopersDAO {
 		} catch (SQLException e) {
 			added=false;
 			System.out.println("Exception in class : DevelpersDAO : method : [insert(Developer)] "+e.getMessage());
+			e.printStackTrace();
 		}
 		return added;
 	}
@@ -44,7 +45,7 @@ public class DevelopersDAO {
 			PreparedStatement ps = connection.prepareStatement("update developers set name=?, cin=?, office_address=?, office_contact_no=?, office_contact_person=?, office_email=?, site_address=?, site_contact_no=?, site_contact_person=?, site_email=? where id =?");
 			ps.setString(1, developer.getName());
 			ps.setString(2, developer.getCin());
-			ps.setString(3, developer.getOfficeAddess());
+			ps.setString(3, developer.getOfficeAddress());
 			ps.setString(4, developer.getOfficeContactNo());
 			ps.setString(5, developer.getOfficeContactPerson());
 			ps.setString(6, developer.getOfficeEmail());
@@ -132,7 +133,7 @@ public class DevelopersDAO {
 		} catch (SQLException e) {
 			System.out.println("Exception in class : DevelpersDAO : method : [getByUsername(String)] "+e.getMessage());
 		}
-		return developersArray.get(0);
+		return developersArray.size()>0?developersArray.get(0):null;
 	}
 	
     
@@ -146,7 +147,7 @@ public class DevelopersDAO {
 				developer.setId(resultSet.getInt(1));
 				developer.setName(resultSet.getString(2));
 				developer.setCin(resultSet.getString(3));
-				developer.setOfficeAddess(resultSet.getString(4));
+				developer.setOfficeAddress(resultSet.getString(4));
 				developer.setOfficeContactNo(resultSet.getString(5));
 				developer.setOfficeContactPerson(resultSet.getString(6));
 				developer.setOfficeEmail(resultSet.getString(7));

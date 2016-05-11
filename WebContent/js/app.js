@@ -43,6 +43,10 @@
                 templateUrl: 'templates/pages/plant/addplant.html',
                 controller: 'AddPlantController',
                 controllerAs: 'addPlantCtrl'
+            }).when('/adddeveloper', {
+                templateUrl: 'templates/pages/developer/adddeveloper.html',
+                controller: 'AddDeveloperController',
+                controllerAs: 'addDeveloperCtrl'
             }).when('/viewdeveloperreading', {
                 templateUrl: 'templates/pages/meter/viewdeveloperreading.html',
                 controller: 'DeveloperViewMeterReadingsController',

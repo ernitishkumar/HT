@@ -8,7 +8,7 @@ public class Developer {
 	
 	private String cin;
 	
-	private String officeAddess;
+	private String officeAddress;
 	
 	private String officeContactNo;
 	
@@ -50,12 +50,12 @@ public class Developer {
 		this.cin = cin;
 	}
 
-	public String getOfficeAddess() {
-		return officeAddess;
+	public String getOfficeAddress() {
+		return officeAddress;
 	}
 
-	public void setOfficeAddess(String officeAddess) {
-		this.officeAddess = officeAddess;
+	public void setOfficeAddress(String officeAddess) {
+		this.officeAddress = officeAddess;
 	}
 
 	public String getOfficeContactNo() {
