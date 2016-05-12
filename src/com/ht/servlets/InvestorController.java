@@ -38,13 +38,14 @@ public class InvestorController extends HttpServlet{
 			System.out.println("Got Action as : "+action);
 			JSONObject jsonObject = new JSONObject();
 			if(action!=null){
+				InvestorPlantMappingDAO investorPlantMappingDAO=new InvestorPlantMappingDAO();
 				InvestorsDAO investorsDAO = new InvestorsDAO();
 				MachinesDAO machinesDAO = new MachinesDAO();
 				if(action.toLowerCase().equals("getinvestorforbifurcation")){
 					String plantId=(String)httpServletRequest.getParameter("plantId");
 					//System.out.println("Inside if for get with plant id : "+plantId);
 					if(plantId!=null){
-						InvestorPlantMappingDAO investorPlantMappingDAO=new InvestorPlantMappingDAO();
+						
 						ArrayList<InvestorPlantMapping> investorPlantMappings = investorPlantMappingDAO.getByPlantId(Integer.parseInt(plantId.trim()));
 						
 						ArrayList<InvestorConsumptionView> investors=new ArrayList<InvestorConsumptionView>();
@@ -93,6 +94,15 @@ public class InvestorController extends HttpServlet{
 					System.out.println(jo.toString());
 					httpServletResponse.setContentType("application/json");
 					httpServletResponse.getWriter().write(jo.toString());
+				}else if(action.toLowerCase().equals("getbydeveloperid")){
+					int plantId = Integer.parseInt(httpServletRequest.getParameter("plantId"));
+					ArrayList<InvestorPlantMapping> investorPlantList = investorPlantMappingDAO.getByPlantId(plantId);  
+					JsonElement element = gson.toJsonTree(investorPlantList,new TypeToken<ArrayList<InvestorPlantMapping>>(){}.getType());
+					jo.add("Investors",element);
+					System.out.println(jo.toString());
+					httpServletResponse.setContentType("application/json");
+					httpServletResponse.getWriter().write(jo.toString());
+					
 				}else{
 					
 				}

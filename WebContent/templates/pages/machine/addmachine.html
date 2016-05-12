@@ -74,7 +74,7 @@
 			</div>
 			<div class="form-group">
 				<label>PPA Letter No:</label> <input class="form-control" type="text"
-					placeholder="PPA Letter No" ng-model="addPlantCtrl.formData.ppaLetterNo"
+					placeholder="PPA Letter No" ng-model="addMachineCtrl.formData.ppaLetterNo"
 					required>
 			</div>
 			
@@ -90,13 +90,29 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label>Developer Id:</label>
+				<label>Developer Id: </label>
 				<br> 
-				<select name="developerId" id="developerId" ng-model="addMachineCtrl.formData.meterNotInUse.meterNo">
-						<option ng-repeat="meter in metersNotInUse" value="{{meter.meterNo}}" selected>{{meter.meterNo}}</option>
+				<select name="developerId" id="developerId" ng-model="formData.developerId" ng-change="addMachineCtrl.getPlantsByDeveloper()" >
+						<option value="-1" selected>Select Developer</option>
+						<option ng-repeat="developer in developers" value="{{developer.id}}">{{developer.name}}</option>
 				</select>
 			</div>
-			
+			<div class="form-group">
+				<label>Plant Id:</label>
+				<br> 
+				<select name="plantId" id="plantId" ng-model="formData.plantId" ng-change="addMachineCtrl.getInvestorsByPlant()">
+						<option value="-1" selected>Select Plant</option>
+						<option ng-repeat="plant in plants" value="{{plant.id}}" >{{plant.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Investor Id:</label>
+				<br> 
+				<select name="investorId" id="investorId" ng-model="formData.investorId">
+						<option value="-1" selected>Select Investor</option>
+						<option ng-repeat="investor in investors" value="{{investor.investorId}}">{{investor.investorCode}}</option>
+				</select>
+			</div>
 			<div class="form-group ">
 				<div class="col-md-6 ">
 					<button type="submit " class="btn btn-success btn-lg btn-block ">

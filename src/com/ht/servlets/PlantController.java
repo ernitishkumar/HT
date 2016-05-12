@@ -1,5 +1,6 @@
 package com.ht.servlets;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -36,13 +37,15 @@ public class PlantController extends HttpServlet{
 			String action=(String)httpServletRequest.getParameter("action");
 			System.out.println("Got Action as : "+action);
 			if(action!=null){
+				JsonObject jo = new JsonObject();
+				PlantsDAO plantsDAO=new PlantsDAO();
 				if(action.toLowerCase().equals("get")){
 					String meterno=(String)httpServletRequest.getParameter("meterno");
 					//System.out.println("Inside if for get with meter : "+meterno);
 					MeterDetails meterDetails = meterDetailsDAO.getByMeterNo(meterno);
-					PlantsDAO plantsDAO=new PlantsDAO();
+					
 					Plant plant = plantsDAO.getByMainMeterNo(meterno);
-					JsonObject jo = new JsonObject();
+					
 					if(meterDetails!=null && plant!=null){
 						MeterReadingsDAO meterReadingsDAO = new MeterReadingsDAO();
 						MeterReadings meterReadings = meterReadingsDAO.getLatestInsertedByMeterNo(meterno);
@@ -61,13 +64,21 @@ public class PlantController extends HttpServlet{
 					//System.out.println("Sent String is :"+jo.toString());
 					httpServletResponse.setContentType("application/json");
 					httpServletResponse.getWriter().print(jo.toString());
-				}else if(action.toLowerCase().equals("list")){
-
-				}else if(action.toLowerCase().equals("create")||action.toLowerCase().equals("update")){
+					
+				}
+				else if(action.toLowerCase().equals("getbydeveloperid")){
+					int developerId = Integer.parseInt(httpServletRequest.getParameter("developerId"));
+					ArrayList<Plant> plantList = plantsDAO.getByDeveloperId(developerId);
+					JsonElement element = gson.toJsonTree(plantList,new TypeToken<ArrayList<Plant>>(){}.getType());
+					jo.add("Plants", element);
+					httpServletResponse.setContentType("application/json");
+					httpServletResponse.getWriter().print(jo.toString());
+				}
+				else if(action.toLowerCase().equals("create")||action.toLowerCase().equals("update")){
 
 					if(action.toLowerCase().equals("create")){
 						Plant plant = new Plant();
-						PlantsDAO plantsDAO = new PlantsDAO();
+						//PlantsDAO plantsDAO = new PlantsDAO();
 						plant.setCode((String)httpServletRequest.getParameter("plantCode"));
 						plant.setName((String)httpServletRequest.getParameter("name"));
 						plant.setAddress((String)httpServletRequest.getParameter("address"));

@@ -127,21 +127,21 @@
 			<div class="form-group">
 				<label>Main Meter No:</label>
 				<br> 
-				<select name="mainMeterNo" id="mainMeterNo" ng-model="addPlantCtrl.formData.meterNotInUse.meterNo">
+				<select name="mainMeterNo" id="mainMeterNo" ng-model="addPlantCtrl.formData.mainMeterNo">
 						<option ng-repeat="meter in metersNotInUse" value="{{meter.meterNo}}" selected>{{meter.meterNo}}</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label>Check Meter No:</label>
 				<br> 
-				<select name="checkMeterNo" id="checkMeterNo" ng-model="addPlantCtrl.formData.meterNotInUse.meterNo">
+				<select name="checkMeterNo" id="checkMeterNo" ng-model="addPlantCtrl.formData.checkMeterNo">
 						<option ng-repeat="meter in metersNotInUse" value="{{meter.meterNo}}" selected>{{meter.meterNo}}</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label>Standby Meter No:</label>
 				<br> 
-				<select name="standbyMeterNo" id="standbyMeterNo" ng-model="addPlantCtrl.formData.meterNotInUse.meterNo">
+				<select name="standbyMeterNo" id="standbyMeterNo" ng-model="addPlantCtrl.formData.standbyMeterNo">
 						<option ng-repeat="meter in metersNotInUse" value="{{meter.meterNo}}" selected>{{meter.meterNo}}</option>
 				</select>
 			</div>
