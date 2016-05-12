@@ -42,7 +42,7 @@ public class DevelopersDAO {
 		boolean updated=false;
 		Connection connection = GlobalResources.getConnection();
 		try {
-			PreparedStatement ps = connection.prepareStatement("update developers set name=?, cin=?, office_address=?, office_contact_no=?, office_contact_person=?, office_email=?, site_address=?, site_contact_no=?, site_contact_person=?, site_email=? where id =?");
+			PreparedStatement ps = connection.prepareStatement("update developers set name=?, cin=?, office_address=?, office_contact_no=?, office_contact_person=?, office_email=?, site_address=?, site_contact_no=?, site_contact_person=?, site_email=?, username=? where id =?");
 			ps.setString(1, developer.getName());
 			ps.setString(2, developer.getCin());
 			ps.setString(3, developer.getOfficeAddress());
@@ -53,7 +53,8 @@ public class DevelopersDAO {
 			ps.setString(8, developer.getSiteContactNo());
 			ps.setString(9, developer.getSiteContactPerson());
 			ps.setString(10, developer.getSiteEmail());
-			ps.setInt(11, developer.getId());
+			ps.setString(11, developer.getUsername());
+			ps.setInt(12, developer.getId());
 			ps.executeUpdate();
 			ps.close();
 			updated=true;

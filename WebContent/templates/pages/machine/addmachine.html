@@ -1,0 +1,113 @@
+<div class="navbar navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="javascript:void(0);">HTBilling</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="javascript:void(0);"
+					ng-click="addMachineCtrl.loadHome()">Home</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="javascript:void(0);"><span
+						class="glyphicon glyphicon-user"></span>{{user.name}}<strong
+						class="caret"></strong></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0);"><span
+								class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+						<li><a href="javascript:void(0);"
+							ng-click="addMachineCtrl.logout()"><span
+								class="glyphicon glyphicon-off"></span> Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="page-header text-center">
+			<h1>
+				<span class="glyphicon glyphicon-certificate"></span> Enter Machine
+				Details.
+			</h1>
+		</div>
+		<form name="machineForm" id="machineForm"
+			ng-submit="addMachineCtrl.processForm()">
+			<div class="form-group has-feedback">
+				<label>Enter Machine Code</label> <input class="form-control"
+					type="text" placeholder="Machine Code"
+					ng-model="addMachineCtrl.formData.code" required>
+			</div>
+			<div class="form-group">
+				<label>Capacity:</label> <input class="form-control" type="text"
+					placeholder="Capacity" ng-model="addMachineCtrl.formData.capacity" required>
+
+			</div>
+			<div class="form-group">
+				<span class="glyphicon glyphicon-calendar"></span> <label>Commissioned
+					Date:</label>
+				<div class='input-group date' id='datetimepicker1'>
+					<input type='date' class="form-control"
+						ng-model="addMachineCtrl.formData.commissionedDate" required /> <span
+						class="input-group-addon"> <span
+						class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Active Rate:</label> <input class="form-control" type="text"
+					placeholder="Active Rate" ng-model="addMachineCtrl.formData.activeRate"
+					required>
+			</div>
+			<div class="form-group">
+				<label>Reactive Rate:</label> <input class="form-control" type="text"
+					placeholder="Reactive Rate" ng-model="addMachineCtrl.formData.reactiveRate"
+					required>
+			</div>
+			<div class="form-group">
+				<label>PPA Letter No:</label> <input class="form-control" type="text"
+					placeholder="PPA Letter No" ng-model="addPlantCtrl.formData.ppaLetterNo"
+					required>
+			</div>
+			
+			<div class="form-group">
+				<span class="glyphicon glyphicon-calendar"></span> <label>PPA Date
+					Date:</label>
+				<div class='input-group date' id='datetimepicker2'>
+					<input type='date' class="form-control"
+						ng-model="addMachineCtrl.formData.ppaDate" required /> <span
+						class="input-group-addon"> <span
+						class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Developer Id:</label>
+				<br> 
+				<select name="developerId" id="developerId" ng-model="addMachineCtrl.formData.meterNotInUse.meterNo">
+						<option ng-repeat="meter in metersNotInUse" value="{{meter.meterNo}}" selected>{{meter.meterNo}}</option>
+				</select>
+			</div>
+			
+			<div class="form-group ">
+				<div class="col-md-6 ">
+					<button type="submit " class="btn btn-success btn-lg btn-block ">
+						<span class="glyphicon glyphicon-flash "></span> Add Plant!
+					</button>
+				</div>
+				<div class="col-md-6 ">
+					<button class="btn btn-danger btn-lg btn-block " type="reset"
+						ng-click="addPlantCtrl.clearForm()">Clear</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

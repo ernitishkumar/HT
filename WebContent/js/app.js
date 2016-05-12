@@ -47,6 +47,14 @@
                 templateUrl: 'templates/pages/developer/adddeveloper.html',
                 controller: 'AddDeveloperController',
                 controllerAs: 'addDeveloperCtrl'
+            }).when('/addinvestor', {
+                templateUrl: 'templates/pages/investor/addinvestor.html',
+                controller: 'AddInvestorController',
+                controllerAs: 'addInvestorCtrl'
+            }).when('/addmachine', {
+                templateUrl: 'templates/pages/machine/addmachine.html',
+                controller: 'AddMachineController',
+                controllerAs: 'addMachineCtrl'
             }).when('/viewdeveloperreading', {
                 templateUrl: 'templates/pages/meter/viewdeveloperreading.html',
                 controller: 'DeveloperViewMeterReadingsController',

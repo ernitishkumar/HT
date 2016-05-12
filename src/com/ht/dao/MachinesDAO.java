@@ -12,8 +12,9 @@ import com.ht.utility.GlobalResources;
 public class MachinesDAO {
 
 	
-	public void insert(Machine machine){
+	public boolean insert(Machine machine){
 		Connection connection = GlobalResources.getConnection();
+		boolean added = false;
 		try {
 			PreparedStatement ps = connection
 					.prepareStatement("insert into machines(code,capacity,commissioned_date,active_rate,reactive_rate,ppa_letter_no,ppa_date,developer_id,plant_id,investor_id) VALUES(?,?,?,?,?,?,?,?,?,?)");
@@ -29,9 +30,12 @@ public class MachinesDAO {
 			ps.setInt(10, machine.getInvestorId());
 			ps.executeUpdate();
 			ps.close();
+			added = true;
 		} catch (SQLException e) {
+			added = false;
 			System.out.println("Exception in class : MachineDAO : method : [insert(Machine)] "+e);
 		}
+		return added;
 	}
 	
 	public void update(Machine machine){
