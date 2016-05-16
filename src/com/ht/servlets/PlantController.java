@@ -112,8 +112,13 @@ public class PlantController extends HttpServlet{
 					}else if(action.toLowerCase().equals("update")){
 
 					}
-				}else if(action.toLowerCase().equals("delete")){
-
+				}else if(action.toLowerCase().equals("getall")){
+					ArrayList<Plant> plants = plantsDAO.getAll();
+					JsonElement element = gson.toJsonTree(plants,new TypeToken<ArrayList<Plant>>(){}.getType());
+					jo.add("Plants",element);
+					httpServletResponse.setContentType("application/json");
+					httpServletResponse.getWriter().print(jo.toString());
+					System.out.println(jo.toString());
 				}
 
 			}else{

@@ -1,21 +1,23 @@
 package com.ht.servlets;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import com.ht.dao.PlantsDAO;
-import com.ht.dao.MeterDetailsDAO;
-import com.ht.beans.*;
+
 import org.json.simple.JSONObject;
-import com.ht.utility.GlobalResources;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.ht.beans.MeterDetails;
+import com.ht.beans.User;
+import com.ht.dao.MeterDetailsDAO;
+import com.ht.utility.GlobalResources;
 
 public class MeterController extends HttpServlet{
 	private MeterDetailsDAO meterDetailsDAO = GlobalResources.getMeterDetailsDAO();
@@ -31,11 +33,15 @@ public class MeterController extends HttpServlet{
 			String action=(String)httpServletRequest.getParameter("action");
 			System.out.println("Got Action : "+action);
 			if(action!=null){
-				JSONObject obj = new JSONObject();
-				JSONObject obj1 = new JSONObject();
-				if(action.toLowerCase().equals("get")){
-					String meterno=(String)httpServletRequest.getParameter("meterno");
-					MeterDetails meterDetails = meterDetailsDAO.getByMeterNo(meterno);
+				JsonObject jo = new JsonObject();
+				if(action.toLowerCase().equals("getall")){
+					ArrayList<MeterDetails> meterDetails = meterDetailsDAO.getAll();
+					JsonElement element = gson.toJsonTree(meterDetails,new TypeToken<ArrayList<MeterDetails>>(){}.getType());
+					jo.add("Meters",element);
+					httpServletResponse.setContentType("application/json");
+					httpServletResponse.getWriter().print(jo.toString());
+					System.out.println(jo.toString());
+					
 				}else if(action.toLowerCase().equals("list")){
 
 				}else if(action.toLowerCase().equals("create")||action.toLowerCase().equals("update")){
@@ -71,7 +77,7 @@ public class MeterController extends HttpServlet{
 				}else if(action.toLowerCase().equals("getmetersnotinuse")){
 					MeterDetailsDAO meterDetailsDAO = new MeterDetailsDAO();
 					ArrayList<MeterDetails> meterDetails = meterDetailsDAO.getMetersNotInUse();
-					JsonObject jo = new JsonObject();
+					
 					JsonElement element = gson.toJsonTree(meterDetails,new TypeToken<ArrayList<MeterDetails>>(){}.getType());
 					jo.add("MetersNotInUse",element);
 					httpServletResponse.setContentType("application/json");

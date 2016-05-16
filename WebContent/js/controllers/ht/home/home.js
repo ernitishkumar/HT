@@ -43,8 +43,16 @@ angular.module("htBillingApp").controller('HomeController', ['$http', '$scope', 
         $location.path("/addmeter");
     };
     
+    this.loadViewMeterPage = function () {
+        $location.path("/viewmeterdetails");
+    };
+    
     this.loadAddPlantPage = function () {
         $location.path("/addplant");
+    };
+    
+    this.loadViewPlantPage = function () {
+        $location.path("/viewplantdetails");
     };
 
     this.loadAddDeveloperPage = function () {
@@ -68,4 +76,5 @@ angular.module("htBillingApp").controller('HomeController', ['$http', '$scope', 
     this.loadCircleHome = function () {
         $location.path("/circlehome");
     };
-}]);
+    
+    }]);

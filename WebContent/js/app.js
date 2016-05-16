@@ -79,6 +79,14 @@
                 templateUrl: 'templates/pages/meter/circle_consumption_validation_page.html',
                 controller: 'CircleConsumptionValidationController',
                 controllerAs: 'circleConsumptionValidationController'
+            }).when('/viewmeterdetails', {
+                templateUrl: 'templates/pages/meter/viewmeterdetails.html',
+                controller: 'ViewMeterDetailsController',
+                controllerAs: 'viewMeterDetailsCtrl'
+            }).when('/viewplantdetails', {
+                templateUrl: 'templates/pages/plant/viewplantdetails.html',
+                controller: 'ViewPlantDetailsController',
+                controllerAs: 'viewPlantDetailsCtrl'
             });
     });
 })();
