@@ -87,6 +87,18 @@
                 templateUrl: 'templates/pages/plant/viewplantdetails.html',
                 controller: 'ViewPlantDetailsController',
                 controllerAs: 'viewPlantDetailsCtrl'
+            }).when('/viewdeveloperdetails', {
+                templateUrl: 'templates/pages/developer/viewdeveloperdetails.html',
+                controller: 'ViewDeveloperDetailsController',
+                controllerAs: 'viewDeveloperDetailsCtrl'
+            }).when('/viewinvestordetails', {
+                templateUrl: 'templates/pages/investor/viewinvestordetails.html',
+                controller: 'ViewInvestorDetailsController',
+                controllerAs: 'viewInvestorDetailsCtrl'
+            }).when('/viewmachinedetails', {
+                templateUrl: 'templates/pages/machine/viewmachinedetails.html',
+                controller: 'ViewMachineDetailsController',
+                controllerAs: 'viewMachineDetailsCtrl'
             });
     });
 })();

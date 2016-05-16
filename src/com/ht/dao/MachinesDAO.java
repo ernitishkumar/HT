@@ -61,6 +61,22 @@ public class MachinesDAO {
 		}
 	}
 	
+	public ArrayList<Machine> getAll(){
+		ArrayList<Machine> machineList = new ArrayList<Machine>();
+		Connection connection = GlobalResources.getConnection();
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from machines");
+			ResultSet rs = ps .executeQuery();
+			machineList = machineMapper(rs);
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in class : MachineDAO : method : [getAll()] "+e);
+		}
+		return machineList;
+	}
+	
+	
 	public Machine getById(int id){
 		ArrayList<Machine> machineList = new ArrayList<Machine>();
 		Connection connection = GlobalResources.getConnection();

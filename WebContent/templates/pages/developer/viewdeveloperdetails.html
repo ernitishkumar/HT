@@ -1,0 +1,76 @@
+<div class="navbar navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="javascript:void(0);">HTBilling</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="javascript:void(0);"
+					ng-click="viewDeveloperDetailsCtrl.loadHome()">Home</a></li>
+			</ul>
+			<ul class="nav navbar-nav pull-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="javascript:void(0);"><span
+						class="glyphicon glyphicon-user"></span> {{user.name}}<strong
+						class="caret"></strong></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0);"><span
+								class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+						<li><a href="javascript:void(0);"
+							ng-click="viewDeveloperDetailsCtrl.logout()"><span
+								class="glyphicon glyphicon-off"></span> Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<br> <br>
+	<div class="page-header text-center">
+		<h2>
+			<span class="glyphicon glyphicon-certificate"></span>View Developer
+			Details
+		</h2>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<th class="text-center success">Name</th>
+				<th class="text-center success">CIN</th>
+				<th class="text-center success">USER Name</th>
+				<th class="text-center success">Office Address</th>
+				<th class="text-center success">Office Contact No</th>
+				<th class="text-center success">Office Contact Person</th>
+				<th class="text-center success">Office Email</th>
+				<th class="text-center success">Site Address</th>
+				<th class="text-center success">Site Contact No</th>
+				<th class="text-center success">Site Contact Person</th>
+				<th class="text-center success">Site Email</th>
+			</thead>
+			<tbody class="text-center">
+				<tr ng-repeat="developer in developers">
+					<td>{{developer.name}}</td>
+					<td>{{developer.cin}}</td>
+					<td>{{developer.username}}</td>
+					<td>{{developer.officeAddress}}</td>
+					<td>{{developer.officeContactNo}}</td>
+					<td>{{developer.officeContactPerson}}</td>
+					<td>{{developer.officeEmail}}</td>
+					<td>{{developer.siteAddress}}</td>
+					<td>{{developer.siteContactNo}}</td>
+					<td>{{developer.siteContactPerson}}</td>
+					<td>{{developer.siteEmail}}</td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+<br>
+<br>

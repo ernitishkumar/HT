@@ -1,6 +1,8 @@
 package com.ht.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,17 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import com.ht.beans.Investor;
 import com.ht.beans.Machine;
 import com.ht.beans.User;
 import com.ht.dao.DevelopersDAO;
 import com.ht.dao.MachinesDAO;
 import com.ht.dao.UserDAO;
 import com.ht.dao.UserRolesDAO;
+import com.ht.utility.GlobalResources;
 
 @WebServlet("/MachineController")
 public class MachineController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Gson gson=GlobalResources.getGson();
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
@@ -60,6 +68,13 @@ public class MachineController extends HttpServlet {
 					System.out.println(jo.toString());
 					httpServletResponse.setContentType("application/json");
 					httpServletResponse.getWriter().write(jo.toString());
+				}else if(action.toLowerCase().equals("getall")){
+					ArrayList<Machine> machines = machinesDAO.getAll();
+					JsonElement element = gson.toJsonTree(machines,new TypeToken<ArrayList<Machine>>(){}.getType());
+					jo.add("Machines",element);
+					httpServletResponse.setContentType("application/json");
+					httpServletResponse.getWriter().write(jo.toString());
+					System.out.println(jo.toString());
 				}
 			}
 		}else{

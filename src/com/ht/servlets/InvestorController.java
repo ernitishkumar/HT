@@ -15,6 +15,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.ht.beans.Developer;
 import com.ht.beans.Investor;
 import com.ht.beans.InvestorConsumptionView;
 import com.ht.beans.InvestorPlantMapping;
@@ -103,8 +104,13 @@ public class InvestorController extends HttpServlet{
 					httpServletResponse.setContentType("application/json");
 					httpServletResponse.getWriter().write(jo.toString());
 					
-				}else{
-					
+				}else if(action.toLowerCase().equals("getall")){
+					ArrayList<Investor> investors =  investorsDAO.getAll();
+					JsonElement element = gson.toJsonTree(investors,new TypeToken<ArrayList<Investor>>(){}.getType());
+					jo.add("Investors",element);
+					httpServletResponse.setContentType("application/json");
+					httpServletResponse.getWriter().write(jo.toString());
+					System.out.println(jo.toString());
 				}
 			}else{
 				//System.out.println("Error coming here");

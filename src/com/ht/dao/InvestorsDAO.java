@@ -69,6 +69,21 @@ public class InvestorsDAO {
 		}
 	}
 	
+	public ArrayList<Investor> getAll(){
+		ArrayList<Investor> investorList = new ArrayList<Investor>();
+		Connection connection = GlobalResources.getConnection();
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from investors");
+			ResultSet rs = ps .executeQuery();
+			investorList = investorMapper(rs);
+			rs.close();
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in class : InvestorDAO : method : [getAll()] "+e);
+		}
+		return investorList;
+	}
+	
 	public Investor getById(int id){
 		ArrayList<Investor> investorList = new ArrayList<Investor>();
 		Connection connection = GlobalResources.getConnection();

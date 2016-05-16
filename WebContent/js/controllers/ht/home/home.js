@@ -59,12 +59,24 @@ angular.module("htBillingApp").controller('HomeController', ['$http', '$scope', 
         $location.path("/adddeveloper");
     };
 
+    this.loadViewDeveloperPage = function () {
+        $location.path("/viewdeveloperdetails");
+    };
+    
     this.loadAddInvestorPage = function () {
         $location.path("/addinvestor");
     };
     
+    this.loadViewInvestorPage = function () {
+        $location.path("/viewinvestordetails");
+    };
+    
     this.loadAddMachinePage = function () {
         $location.path("/addmachine");
+    };
+    
+    this.loadViewMachinePage = function () {
+        $location.path("/viewmachinedetails");
     };
     
     this.loadHome = function () {
